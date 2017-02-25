@@ -9,6 +9,8 @@ import java.net.InetAddress;
 import java.util.Arrays;
 
 
+//TODO: change names of client server to sender receiver
+
 import aoop.asteroids.Asteroids;
 import aoop.asteroids.menu.MenuModel;
 

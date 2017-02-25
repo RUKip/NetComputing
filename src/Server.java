@@ -35,7 +35,7 @@ public class Server implements Runnable {
 		}
 	}
 	
-	private synchronized void send(Message message) {
+	private synchronized void send(Message message) { //responds to request
 		try {
 			ByteArrayOutputStream os = new ByteArrayOutputStream();
 			ObjectOutputStream out = new ObjectOutputStream(os);
