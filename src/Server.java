@@ -1,4 +1,3 @@
-package aoop.asteroids.network;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -8,12 +7,9 @@ import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.util.ArrayList;
 
-import aoop.asteroids.Asteroids;
 //
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
-
-import aoop.asteroids.model.Game;
 
 
 public class Server implements Runnable {
@@ -23,9 +19,12 @@ public class Server implements Runnable {
 	private int packageId;
 	private int clientId = 1;
 		
-	private Game game;
+	private Message message;
 	
 //	Logger logger = LoggerFactory.getLogger(Server.class);
+	
+	private Boolean tooMuchEnergy= false;
+	
 	
 	public Server() {
 		try {
@@ -36,13 +35,13 @@ public class Server implements Runnable {
 		}
 	}
 	
-	private synchronized void send(Game game) {
+	private synchronized void send(Message message) {
 		try {
 			ByteArrayOutputStream os = new ByteArrayOutputStream();
 			ObjectOutputStream out = new ObjectOutputStream(os);
 
 			out.writeInt(++packageId);
-			out.writeObject(game);
+			out.writeObject(message);
 			byte[] data = os.toByteArray();
 
 			for (Connection client : clients)
@@ -59,17 +58,17 @@ public class Server implements Runnable {
 	public void connect(Connection client, String name) {
 		if (!clients.contains(client)) {
 			clients.add(client);
-			game.addName(name);
+			message.addName(name);
 		}
 	}
 	
 	public void disconnect(Connection client, int id) {
 		clients.remove(client);
-		game.removeSpaceship(id);
+		message.removeSpaceship(id);
 	}
 	
 	public void handle(int clientId, int command) {
-		game.updateSpaceship(clientId, command);
+		message.updateSpaceship(clientId, command);
 	}
 	
 	public int getClientId() {
@@ -94,7 +93,7 @@ public class Server implements Runnable {
 		}
 
 		Asteroids asteroids = new Asteroids();
-		game = asteroids.getGame();
+		message = asteroids.getGame();
 		
 
 		
@@ -102,7 +101,7 @@ public class Server implements Runnable {
 		while (true) {
 			executionTime = System.currentTimeMillis();
 						
-			send(game);
+			send(message);
 
 			executionTime -= System.currentTimeMillis();
 			sleepTime = 40 + executionTime;

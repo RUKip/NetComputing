@@ -15,18 +15,17 @@ import aoop.asteroids.menu.MenuModel;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
-import aoop.asteroids.model.Game;
+import aoop.asteroids.model.message;
 
 public class Client implements Runnable {
 	
 	protected DatagramSocket socket;
-	protected Asteroids asteroids;
 	
 	protected Connection connection, serverConnection;
 	
 	protected int lastPackageId;
 	
-	protected Game game;
+	protected Message message;
 	
 //	Logger logger = LoggerFactory.getLogger(Server.class);
 	
@@ -40,8 +39,8 @@ public class Client implements Runnable {
 		}
 	}
 	
-	protected Game receiveGame() {
-		Game game = null;
+	protected Message receivemessage() {
+		Message message = null;
 		
 		try {
 			byte[] inData = new byte[4096];
@@ -60,7 +59,7 @@ public class Client implements Runnable {
 			int packageId = in.readInt();
 			if (lastPackageId < packageId) {
 				lastPackageId = packageId;
-				game = (Game) in.readObject();
+				message = (Message) in.readObject();
 			}
 			
 			in.close();
@@ -72,7 +71,7 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 		
-		return game;
+		return message;
 	}
 	
 	protected int connectToServer() {
@@ -145,17 +144,17 @@ public class Client implements Runnable {
 	public void run() {
 		int id = connectToServer();
 		asteroids = new Asteroids(socket, serverConnection, receiveGame());
-		this.game = asteroids.getGame();
+		this.message = asteroids.getGame();
 		
-		Game game;
+		Message game;
 		while (true) {
 			if (this.game.isStopped()) {
 				disconnectFromServer(id);
 				return;
 			}
-			game = receiveGame();
-			if (game != null) {
-				this.game.updateClient(game);
+			message = receiveGame();
+			if (message != null) {
+				this.message.updateClient(message);
 			}
 		}
 	}
