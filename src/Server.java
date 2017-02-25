@@ -92,7 +92,6 @@ public class Server implements Runnable {
 			e1.printStackTrace();
 		}
 
-		Asteroids asteroids = new Asteroids();
 		message = asteroids.getGame();
 		
 
