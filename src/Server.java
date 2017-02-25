@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.ServerSocket;
 import java.net.SocketException;
 import java.util.ArrayList;
 
@@ -14,11 +15,12 @@ import java.util.ArrayList;
 
 public class Server implements Runnable {
 	
-	private volatile ArrayList<Connection> clients = new ArrayList<>();
-	private volatile DatagramSocket socket;
+	private ServerSocket socket;
 	private int packageId;
 	private int clientId = 1;
-		
+	
+	
+	protected Connection clientConnection;
 	private Message message;
 	
 //	Logger logger = LoggerFactory.getLogger(Server.class);
@@ -28,14 +30,14 @@ public class Server implements Runnable {
 	
 	public Server() {
 		try {
-			socket = new DatagramSocket(8850);
-		} catch (SocketException se) {
+				socket = new ServerSocket(8850);
+		} catch (IOException e) {
 //			logger.error("Unable to intialize socket");
-			se.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 	
-	private synchronized void send(Message message) { //responds to request
+	private synchronized void send(Message message) { //responds to request(do we still need this? Client should do this right?)
 		try {
 			ByteArrayOutputStream os = new ByteArrayOutputStream();
 			ObjectOutputStream out = new ObjectOutputStream(os);
@@ -44,8 +46,7 @@ public class Server implements Runnable {
 			out.writeObject(message);
 			byte[] data = os.toByteArray();
 
-			for (Connection client : clients)
-				socket.send(new DatagramPacket(data, data.length, client.getIp(), client.getPort()));
+//			socket.send(new DatagramPacket(data, data.length, client.getIp(), client.getPort()));
 			
 			out.close();
 			os.close();
@@ -77,22 +78,20 @@ public class Server implements Runnable {
 	
 	public void run() {
 		try {
-			DatagramSocket handlerSocket = new DatagramSocket(8851);
-			DatagramSocket receiverSocket = new DatagramSocket(8852);
+			ServerSocket handlerSocket = new ServerSocket(8851);
+			ServerSocket receiverSocket = new ServerSocket(8852);
 			
 			InputHandler handler = new InputHandler(this, handlerSocket);
 			Thread t_handler = new Thread(handler);
 			t_handler.start();
 			
-			KeyReceiver receiver = new KeyReceiver(this, receiverSocket);
+			Receiver receiver = new Receiver(this, receiverSocket);
 			Thread t_receiver = new Thread(receiver);
 			t_receiver.start();
 		} catch (SocketException e1) {
 //			logger.error("Error in run");
 			e1.printStackTrace();
 		}
-
-		message = asteroids.getGame();
 		
 
 		

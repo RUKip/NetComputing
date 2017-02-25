@@ -2,8 +2,11 @@
 public class Main {
 
 	
+	private UI;
+	
 	public static void main(){
-		startUI();
+		UI ui = new UI();
+		UI.startUI();
 	}
 	
 	

@@ -6,24 +6,23 @@ import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
 //TODO: change names of client server to sender receiver
 
-import aoop.asteroids.Asteroids;
-import aoop.asteroids.menu.MenuModel;
-
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
-import aoop.asteroids.model.message;
-
 public class Client implements Runnable {
 	
-	protected DatagramSocket socket;
+	private ArrayList<Connection> clients = new ArrayList<>();
+
+	protected ServerSocket socket;
 	
-	protected Connection connection, serverConnection;
+	protected Connection serverConnection;
 	
 	protected int lastPackageId;
 	
@@ -34,7 +33,7 @@ public class Client implements Runnable {
 	public Client(String serverAddress, int serverPort) {
 		serverConnection = new Connection(serverAddress,serverPort);
 		try {
-			socket = new DatagramSocket();
+			socket = new ServerSocket();
 			connection = new Connection(InetAddress.getLocalHost().getHostAddress(), socket.getLocalPort());
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
@@ -83,7 +82,7 @@ public class Client implements Runnable {
 			out.writeBoolean(true); //connect == true, disconnect == false
 			out.writeObject(connection);
 			out.writeInt(0); // 'id'
-			out.writeObject(MenuModel.getNickname());
+			out.writeObject();
 			byte[] data = os.toByteArray();
 			
 			DatagramPacket dp = new DatagramPacket(data, data.length, serverConnection.getIp(), 8851);
@@ -121,26 +120,26 @@ public class Client implements Runnable {
 		return -1;
 	}
 	
-	//TODO use this somewhere
-	protected void disconnectFromServer(int id) {
-		try {
-			ByteArrayOutputStream os = new ByteArrayOutputStream();
-			ObjectOutputStream out = new ObjectOutputStream(os);
-			out.writeBoolean(false); //connect == true, disconnect == false
-			out.writeObject(connection);
-			out.writeInt(id);
-			out.writeObject(MenuModel.getNickname());
-			byte[] data = os.toByteArray();
-			
-			DatagramPacket dp = new DatagramPacket(data, data.length, serverConnection.getIp(), 8851);
-			socket.send(dp);
-			
-			out.close();
-			os.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	//TODO use this somewhere
+//	protected void disconnectFromServer(int id) {
+//		try {
+//			ByteArrayOutputStream os = new ByteArrayOutputStream();
+//			ObjectOutputStream out = new ObjectOutputStream(os);
+//			out.writeBoolean(false); //connect == true, disconnect == false
+//			out.writeObject(connection);
+//			out.writeInt(id);
+//			out.writeObject();
+//			byte[] data = os.toByteArray();
+//			
+//			DatagramPacket dp = new DatagramPacket(data, data.length, serverConnection.getIp(), 8851);
+//			socket.send(dp);
+//			
+//			out.close();
+//			os.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	@Override
 	public void run() {
