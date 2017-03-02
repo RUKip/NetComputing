@@ -1,15 +1,7 @@
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 //TODO: change names of client server to sender receiver
@@ -18,8 +10,11 @@ import java.util.Arrays;
 //import org.slf4j.LoggerFactory;
 
 public class Client implements Runnable {
+
+	//WAIT_TIME in milliseconds after sending request before check if energy usage decreased;
+	private static final int WAIT_TIME = 600;
 	
-	private ArrayList<Connection> servers = new ArrayList<>();
+	private ArrayList<Connection> servers = new ArrayList<>(); //TODO: updated by a global database?? Maybe use REST/SOAP for this??
 
 	protected Socket socket;
 	
@@ -27,47 +22,60 @@ public class Client implements Runnable {
 	
 	protected Message message;
 	
+	private boolean tooMuchEnergy= false;
+	
 //	Logger logger = LoggerFactory.getLogger(Server.class);
 	
 	public Client(String serverAddress, int serverPort) {
 	}
 	
-	protected int connectToServer(Connection connection) {
+	protected boolean connectToServer(Connection connection) { //connects to server and tries turning it on, returns true if succeeded
+		ObjectOutputStream out;
+		
 		try {
 			socket = new Socket(connection.getIp(), connection.getPort());
+			out = new ObjectOutputStream(socket.getOutputStream());
+			out.writeObject(message);
 			
+			//TODO: read response here
+			
+			out.close();
+			socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
+
 //		logger.error("something went wrong while connecting to server"); 
 		//change to logger thing - probably in catch blocks
-		return -1;
+		return false;
 	}
 	
-//	//TODO use this somewhere
-//	protected void disconnectFromServer(int id) {
-//		try {
-//			ByteArrayOutputStream os = new ByteArrayOutputStream();
-//			ObjectOutputStream out = new ObjectOutputStream(os);
-//			out.writeBoolean(false); //connect == true, disconnect == false
-//			out.writeObject(connection);
-//			out.writeInt(id);
-//			out.writeObject();
-//			byte[] data = os.toByteArray();
-//			
-//			DatagramPacket dp = new DatagramPacket(data, data.length, serverConnection.getIp(), 8851);
-//			socket.send(dp);
-//			
-//			out.close();
-//			os.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	//TODO: implement
+	private void checkTooMuchEnergy(){  //Energy usage check, set tooMuchEnergy true if threshold reached
+		tooMuchEnergy = true;
+	}
+	
 
 	@Override
 	public void run() {
-		
+		while(true){
+			checkTooMuchEnergy();
+			if(tooMuchEnergy){
+				for(Connection server : servers){
+					message = new Message(Message.CHECK_TYPE, Message.CHECK_MESSAGE);
+					boolean serverStarted = connectToServer(server); //response of connected server, true if server was idle and started 
+					if(serverStarted){
+						tooMuchEnergy = false;
+						break;
+					}
+				}
+			}
+			try {
+				Thread.sleep(WAIT_TIME);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

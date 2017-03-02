@@ -12,17 +12,13 @@ import java.net.Socket;
 public class Server implements Runnable {
 	
 	private ServerSocket serverSocket;
-	private int packageId;
-	private int clientId = 1;
-	
+
+	private boolean serverBusy = false; //TODO: Will be accessed by multiple thread so is volatile
 	
 	protected Connection clientConnection;
 	private Message message;
 	
 //	Logger logger = LoggerFactory.getLogger(Server.class);
-	
-	private Boolean tooMuchEnergy= false;
-	
 	
 	public Server() {
 		try {
@@ -31,6 +27,14 @@ public class Server implements Runnable {
 //			logger.error("Unable to intialize socket");
 			e.printStackTrace();
 		}
+	}
+
+	public boolean isBusy(){
+		return serverBusy;
+	}
+	
+	public void setBusy(boolean value){
+		serverBusy = value;
 	}
 	
 	public void run() {
@@ -48,6 +52,12 @@ public class Server implements Runnable {
 
 			executionTime -= System.currentTimeMillis();
 			sleepTime = 40 + executionTime;
+			
+			if(serverBusy){
+				//TODO: if server not already busy, active the rest of the server(stop idling) 
+			}else{
+				//TODO: if server not already not busy, stop the rest of the server (start idling)
+			}
 			
 			try {
 				Thread.sleep(sleepTime);
