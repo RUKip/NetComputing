@@ -7,6 +7,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -18,11 +19,9 @@ import java.util.Arrays;
 
 public class Client implements Runnable {
 	
-	private ArrayList<Connection> clients = new ArrayList<>();
+	private ArrayList<Connection> servers = new ArrayList<>();
 
-	protected ServerSocket socket;
-	
-	protected Connection serverConnection;
+	protected Socket socket;
 	
 	protected int lastPackageId;
 	
@@ -31,85 +30,11 @@ public class Client implements Runnable {
 //	Logger logger = LoggerFactory.getLogger(Server.class);
 	
 	public Client(String serverAddress, int serverPort) {
-		serverConnection = new Connection(serverAddress,serverPort);
-		try {
-			socket = new ServerSocket();
-			connection = new Connection(InetAddress.getLocalHost().getHostAddress(), socket.getLocalPort());
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
 	}
 	
-	protected Message receivemessage() {
-		Message message = null;
-		
+	protected int connectToServer(Connection connection) {
 		try {
-			byte[] inData = new byte[4096];
-			DatagramPacket dp = new DatagramPacket(inData, inData.length);
-			socket.receive(dp);
-			
-			int len = dp.getLength();
-			byte[] data = new byte[len];
-			data = dp.getData();
-			
-			data = Arrays.copyOfRange(data, 0, len);
-			
-			ByteArrayInputStream is = new ByteArrayInputStream(data);
-			ObjectInputStream in = new ObjectInputStream(is);
-			
-			int packageId = in.readInt();
-			if (lastPackageId < packageId) {
-				lastPackageId = packageId;
-				message = (Message) in.readObject();
-			}
-			
-			in.close();
-			is.close();
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		return message;
-	}
-	
-	protected int connectToServer() {
-		try {
-			ByteArrayOutputStream os = new ByteArrayOutputStream();
-			ObjectOutputStream out = new ObjectOutputStream(os);
-			out.writeBoolean(true); //connect == true, disconnect == false
-			out.writeObject(connection);
-			out.writeInt(0); // 'id'
-			out.writeObject();
-			byte[] data = os.toByteArray();
-			
-			DatagramPacket dp = new DatagramPacket(data, data.length, serverConnection.getIp(), 8851);
-			socket.send(dp);
-			
-			out.close();
-			os.close();
-						
-			byte[] inData = new byte[4096];
-			dp = new DatagramPacket(inData, inData.length);
-			socket.receive(dp);
-			
-			int len = dp.getLength();
-			data = new byte[len];
-			data = dp.getData();
-			
-			data = Arrays.copyOfRange(data, 0, len);
-			
-			ByteArrayInputStream is = new ByteArrayInputStream(data);
-			ObjectInputStream in = new ObjectInputStream(is);
-			
-			int clientId = in.readInt();
-			
-			in.close();
-			is.close();
-			
-			return clientId;
+			socket = new Socket(connection.getIp(), connection.getPort());
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -143,20 +68,6 @@ public class Client implements Runnable {
 
 	@Override
 	public void run() {
-		int id = connectToServer();
-		asteroids = new Asteroids(socket, serverConnection, receiveGame());
-		this.message = asteroids.getGame();
 		
-		Message game;
-		while (true) {
-			if (this.game.isStopped()) {
-				disconnectFromServer(id);
-				return;
-			}
-			message = receiveGame();
-			if (message != null) {
-				this.message.updateClient(message);
-			}
-		}
 	}
 }
