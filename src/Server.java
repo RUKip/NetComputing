@@ -33,7 +33,6 @@ public class Server implements Runnable {
 		}
 	}
 	
-	
 	public void run() {
 		long executionTime, sleepTime;
 		while (true) {
