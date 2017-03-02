@@ -1,4 +1,3 @@
-package aoop.asteroids.network;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
