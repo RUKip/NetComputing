@@ -64,12 +64,12 @@ public class Server implements Runnable {
 	
 	public void disconnect(Connection client, int id) {
 		clients.remove(client);
-		message.removeSpaceship(id);
+	
 	}
 	
-	public void handle(int clientId, int command) {
-		message.updateSpaceship(clientId, command);
-	}
+//	public void handle(int clientId, int command) {
+//		message.updateSpaceship(clientId, command);
+//	}
 	
 	public int getClientId() {
 		return clientId++;
@@ -84,9 +84,9 @@ public class Server implements Runnable {
 			Thread t_handler = new Thread(handler);
 			t_handler.start();
 			
-			KeyReceiver receiver = new KeyReceiver(this, receiverSocket);
-			Thread t_receiver = new Thread(receiver);
-			t_receiver.start();
+//			KeyReceiver receiver = new KeyReceiver(this, receiverSocket);
+//			Thread t_receiver = new Thread(receiver);
+//			t_receiver.start();
 		} catch (SocketException e1) {
 //			logger.error("Error in run");
 			e1.printStackTrace();
