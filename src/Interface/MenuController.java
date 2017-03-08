@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import Sockets.Client;
+
 
 public class MenuController {
 	
@@ -30,7 +32,7 @@ public class MenuController {
 			case 1:
 				button.addActionListener(new ActionListener() {  
 			        public void actionPerformed(ActionEvent e) {
-//		        		connectToServer(model.getAddress(), model.getPort());
+		        		new Client(model.getAddress(), model.getPort()).run();
 		    	    	view.removePanel();
 			        }
 				});

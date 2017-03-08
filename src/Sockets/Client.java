@@ -1,7 +1,9 @@
+package Sockets;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 //TODO: change names of client server to sender receiver
@@ -14,7 +16,7 @@ public class Client implements Runnable {
 	//WAIT_TIME in milliseconds after sending request before check if energy usage decreased;
 	private static final int WAIT_TIME = 600;
 	
-	private ArrayList<Connection> servers = new ArrayList<>(); //TODO: updated by a global database?? Maybe use REST/SOAP for this??
+	private ArrayList<Connection> servers; //TODO: updated by a global database?? Maybe use REST/SOAP for this??
 
 	protected Socket socket;
 	
@@ -27,6 +29,8 @@ public class Client implements Runnable {
 //	Logger logger = LoggerFactory.getLogger(Server.class);
 	
 	public Client(String serverAddress, int serverPort) {
+		servers = new ArrayList<>();
+		servers.add(new Connection(serverAddress, serverPort)); //TODO: for now to test
 	}
 	
 	protected boolean connectToServer(Connection connection) { //connects to server and tries turning it on, returns true if succeeded
@@ -38,11 +42,15 @@ public class Client implements Runnable {
 			out.writeObject(message);
 			
 			//TODO: read response here
+			System.out.println("I send my request to the server");
+			
+			
 			
 			out.close();
 			socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println(" oh noes connection to server failed");
 		}
 		
 
@@ -51,9 +59,11 @@ public class Client implements Runnable {
 		return false;
 	}
 	
-	//TODO: implement
+	//TODO: implement (now its randomly simulated too much energy)
 	private void checkTooMuchEnergy(){  //Energy usage check, set tooMuchEnergy true if threshold reached
-		tooMuchEnergy = true;
+		int randomNr = ThreadLocalRandom.current().nextInt(0, 100+1);
+		tooMuchEnergy = (randomNr>90);
+		System.out.println("Random Nr: " + randomNr);
 	}
 	
 
