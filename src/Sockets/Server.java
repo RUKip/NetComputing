@@ -56,8 +56,10 @@ public class Server implements Runnable {
 			
 			if(serverBusy){
 				//TODO: if server not already busy, active the rest of the server(stop idling) 
+				System.out.println("I am Busy so don't accept requests");
 			}else{
 				//TODO: if server not already not busy, stop the rest of the server (start idling)
+				System.out.println("I am not busy, so give me your requests");
 			}
 			
 			try {

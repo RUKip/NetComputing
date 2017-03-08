@@ -42,6 +42,9 @@ public class Client implements Runnable {
 			out.writeObject(message);
 			
 			//TODO: read response here
+			System.out.println("I send my request to the server");
+			
+			
 			
 			out.close();
 			socket.close();
