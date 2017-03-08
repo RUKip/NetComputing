@@ -1,3 +1,4 @@
+package Sockets;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -14,7 +15,7 @@ public class Client implements Runnable {
 	//WAIT_TIME in milliseconds after sending request before check if energy usage decreased;
 	private static final int WAIT_TIME = 600;
 	
-	private ArrayList<Connection> servers = new ArrayList<>(); //TODO: updated by a global database?? Maybe use REST/SOAP for this??
+	private ArrayList<Connection> servers; //TODO: updated by a global database?? Maybe use REST/SOAP for this??
 
 	protected Socket socket;
 	
@@ -27,6 +28,8 @@ public class Client implements Runnable {
 //	Logger logger = LoggerFactory.getLogger(Server.class);
 	
 	public Client(String serverAddress, int serverPort) {
+		servers = new ArrayList<>();
+		servers.add(new Connection(serverAddress, serverPort)); //TODO: for now to test
 	}
 	
 	protected boolean connectToServer(Connection connection) { //connects to server and tries turning it on, returns true if succeeded
