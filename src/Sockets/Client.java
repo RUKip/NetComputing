@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 //TODO: change names of client server to sender receiver
@@ -46,6 +47,7 @@ public class Client implements Runnable {
 			socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println(" oh noes connection to server failed");
 		}
 		
 
@@ -54,9 +56,11 @@ public class Client implements Runnable {
 		return false;
 	}
 	
-	//TODO: implement
+	//TODO: implement (now its randomly simulated too much energy)
 	private void checkTooMuchEnergy(){  //Energy usage check, set tooMuchEnergy true if threshold reached
-		tooMuchEnergy = true;
+		int randomNr = ThreadLocalRandom.current().nextInt(0, 100+1);
+		tooMuchEnergy = (randomNr>90);
+		System.out.println("Random Nr: " + randomNr);
 	}
 	
 
