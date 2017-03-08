@@ -25,7 +25,7 @@ public class MenuController {
 				button.addActionListener(new ActionListener() {  
 			        public void actionPerformed(ActionEvent e) {
 			        	//new Server()
-			        	view.removePanel();
+			        	//view.removePanel();
 			        }
 				});
 				break;
@@ -33,7 +33,7 @@ public class MenuController {
 				button.addActionListener(new ActionListener() {  
 			        public void actionPerformed(ActionEvent e) {
 		        		new Client(model.getAddress(), model.getPort()).run();
-		    	    	view.removePanel();
+		    	    	//view.removePanel();
 			        }
 				});
 //			case 2:

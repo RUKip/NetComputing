@@ -1,5 +1,6 @@
 package Sockets;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -35,16 +36,27 @@ public class Client implements Runnable {
 	
 	protected boolean connectToServer(Connection connection) { //connects to server and tries turning it on, returns true if succeeded
 		ObjectOutputStream out;
+		ObjectInputStream is;
 		
 		try {
 			socket = new Socket(connection.getIp(), connection.getPort());
 			out = new ObjectOutputStream(socket.getOutputStream());
+			is = new ObjectInputStream(socket.getInputStream());
+
 			out.writeObject(message);
 			
 			//TODO: read response here
 			System.out.println("I send my request to the server");
 			
-			
+			//TODO: depricated method
+			Message response;
+            while ((response = is.) != null) {
+                System.out.println("Server: " + responseLine);
+                if (responseLine.indexOf("Ok") != -1) {
+                  break;
+                }
+            }
+
 			
 			out.close();
 			socket.close();

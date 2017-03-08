@@ -23,7 +23,7 @@ public class InputHandler implements Runnable {
 			ObjectInputStream inStream = new ObjectInputStream(socket.getInputStream());
 			message = (Message) inStream.readObject();
 			
-			socket.close();
+			
 			
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -59,40 +59,17 @@ public class InputHandler implements Runnable {
 	
 	@Override
 	public void run() {
-		while (true) {
 				Message message = receiveMessage();
 				
-				System.out.println(message.getData());	//TODO: now just for showing it works.
+				System.out.println("Client: " + message.getData());	//TODO: now just for showing it works.
 				
 				respond();
-				
-//				
-//				boolean connect = in.readBoolean();
-//				Connection clientConnection = (Connection) in.readObject();
-//				int id = in.readInt();
-//				String name = (String) in.readObject();
-//				if (connect)
-//					server.connect(clientConnection, name);
-//				else
-//					server.disconnect(clientConnection, id);
-//				
-//				in.close();
-//				is.close();
-//				
-//				ByteArrayOutputStream os = new ByteArrayOutputStream();
-//				ObjectOutputStream out = new ObjectOutputStream(os);
-//				
-//				int clientId = server.getClientId();
-//				out.writeInt(clientId);
-//				out.flush();
-//				
-//				data = os.toByteArray();				
-//				dp = new DatagramPacket(data, data.length, clientConnection.getIp(), clientConnection.getPort());
-//				socket.send(dp);
-//				
-//				out.close();
-//				os.close();
-				
-		}
+					
+				try {
+					socket.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}
 }
