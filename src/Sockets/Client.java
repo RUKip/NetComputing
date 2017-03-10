@@ -73,7 +73,7 @@ public class Client implements Runnable {
 			socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println(" oh noes connection to server failed");
+			System.out.println(" oh noes connection to server failed, possibly server is offline or entry is wrong");
 		}
 		
 
