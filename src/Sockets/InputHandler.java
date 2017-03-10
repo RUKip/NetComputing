@@ -66,33 +66,6 @@ public class InputHandler implements Runnable {
 				
 				respond();
 				
-//				
-//				boolean connect = in.readBoolean();
-//				Connection clientConnection = (Connection) in.readObject();
-//				int id = in.readInt();
-//				String name = (String) in.readObject();
-//				if (connect)
-//					server.connect(clientConnection, name);
-//				else
-//					server.disconnect(clientConnection, id);
-//				
-//				in.close();
-//				is.close();
-//				
-//				ByteArrayOutputStream os = new ByteArrayOutputStream();
-//				ObjectOutputStream out = new ObjectOutputStream(os);
-//				
-//				int clientId = server.getClientId();
-//				out.writeInt(clientId);
-//				out.flush();
-//				
-//				data = os.toByteArray();				
-//				dp = new DatagramPacket(data, data.length, clientConnection.getIp(), clientConnection.getPort());
-//				socket.send(dp);
-//				
-//				out.close();
-//				os.close();
-				
 		}
 	}
 }
