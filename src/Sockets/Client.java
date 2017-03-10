@@ -50,7 +50,7 @@ public class Client implements Runnable {
 			
 			//TODO: depricated method
 			Message response;
-            while ((response = is.) != null) {
+            while ((response = is) != null) {
                 System.out.println("Server: " + responseLine);
                 if (responseLine.indexOf("Ok") != -1) {
                   break;
