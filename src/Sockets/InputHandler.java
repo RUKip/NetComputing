@@ -23,7 +23,7 @@ public class InputHandler implements Runnable {
 			ObjectInputStream inStream = new ObjectInputStream(socket.getInputStream());
 			message = (Message) inStream.readObject();
 			
-			socket.close();
+			
 			
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -59,13 +59,17 @@ public class InputHandler implements Runnable {
 	
 	@Override
 	public void run() {
-		while (true) {
 				Message message = receiveMessage();
 				
-				System.out.println(message.getData());	//TODO: now just for showing it works.
+				System.out.println("Client: " + message.getData());	//TODO: now just for showing it works.
 				
 				respond();
-				
-		}
+					
+				try {
+					socket.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}
 }

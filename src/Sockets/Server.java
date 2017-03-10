@@ -23,6 +23,7 @@ public class Server implements Runnable {
 	
 	public Server() {
 		try {
+				System.out.println("made server object");
 				serverSocket = new ServerSocket(8850); //TODO: why 8850???
 		} catch (IOException e) {
 //			logger.error("Unable to intialize socket");
@@ -38,6 +39,7 @@ public class Server implements Runnable {
 		serverBusy = value;
 	}
 	
+	@Override
 	public void run() {
 		long executionTime, sleepTime;
 		while (true) {
@@ -45,7 +47,9 @@ public class Server implements Runnable {
 				
 			Socket socket;
 			try {
+				System.out.println("waiting for server to connect");
 				socket = serverSocket.accept();
+				System.out.println("accepted server");
 				new InputHandler(this, socket).run();
 			} catch (IOException e1) {
 				e1.printStackTrace();
@@ -59,7 +63,7 @@ public class Server implements Runnable {
 				System.out.println("I am Busy so don't accept requests");
 			}else{
 				//TODO: if server not already not busy, stop the rest of the server (start idling)
-				System.out.println("I am not busy, so give me your requests");
+				System.out.println("I am not busy, so Now starting");
 			}
 			
 			try {
