@@ -16,6 +16,7 @@ public class Client implements Runnable {
 
 	//WAIT_TIME in milliseconds after sending request before check if energy usage decreased;
 	private static final int WAIT_TIME = 600;
+	private static final long RESPONSE_INTERVAL = 5000; //5 sec
 	
 	private ArrayList<Connection> servers; //TODO: updated by a global database?? Maybe use REST/SOAP for this??
 
@@ -45,12 +46,12 @@ public class Client implements Runnable {
 
 			out.writeObject(message);
 			
-			//TODO: read response here
 			System.out.println("I send my request to the server");
 			
-			//TODO: depricated method
+			//TODO: check if this works
 			Message response;
             try {
+            	long startingTime = System.currentTimeMillis();
 				while ((response = (Message) is.readObject()) != null) {
 				    System.out.println("Server: " + response.getData());
 				    if (response.getData().equals(Message.AVAILABLE_MESSAGE)) {
@@ -61,6 +62,7 @@ public class Client implements Runnable {
 				    	return false;
 				    }
 				    //TODO: now bound to wait for a response, should stop waiting after some time
+				    if(System.currentTimeMillis() > startingTime + RESPONSE_INTERVAL) return false;
 				}
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
