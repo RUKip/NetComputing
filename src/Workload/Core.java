@@ -56,7 +56,7 @@ public class Core implements Runnable, Comparable<Core> {
 	@Override
 	public int compareTo(Core c) {
 		if(c != null && c instanceof Core) 
-			return (c.getWorkload() - this.workload);
+			return (this.capacity - this.workload) - (c.getCapacity() - c.getWorkload());
 		return 0;
 	}
 	
