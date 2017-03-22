@@ -1,5 +1,6 @@
 package Database;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -9,7 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-public class Database {
+public class Database implements RemoteDatabase{
 	
 	private EntityManagerFactory emf;
 	private EntityManager em;
@@ -47,6 +48,7 @@ public class Database {
 //	 }
 	
 	
+	//TODO: Have 
 	public void add(Employee employee){
 		TypedQuery query = em.createQuery("SELECT p FROM Employee p WHERE p.firstName='" + employee.getFirstName()+"'", Employee.class);
 		ArrayList<Employee> employees = (ArrayList<Employee>) query.getResultList();
