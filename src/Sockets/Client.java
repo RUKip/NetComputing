@@ -50,6 +50,7 @@ public class Client implements Runnable {
 			
 			//TODO: check if this works
 			Message response;
+
             try {
             	long startingTime = System.currentTimeMillis();
 				while ((response = (Message) is.readObject()) != null) {

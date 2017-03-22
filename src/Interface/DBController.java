@@ -7,18 +7,17 @@ import javax.swing.JButton;
 
 import Sockets.Client;
 
-
-public class MenuController {
+public class DBController {
 	
-	private MenuView view;
-	private MenuModel model;
+	private DBView view;
+	private DBModel model;
 	
-	public MenuController(MenuView view, MenuModel model){
+	public DBController(DBView view, DBModel model){
 		this.view = view;
 		this.model = model;
 	}
-	
 
+	
 	public void addActionListener(JButton button, int idx) {
 		switch (idx) {
 			case 0:
@@ -26,41 +25,28 @@ public class MenuController {
 			        public void actionPerformed(ActionEvent e) {
 			        	//new Server()
 			        	//view.removePanel();
+			        	System.out.println("Button 1 pressed");
 			        }
 				});
 				break;
 			case 1:
 				button.addActionListener(new ActionListener() {  
 			        public void actionPerformed(ActionEvent e) {
-		        		new Client(model.getAddress(), model.getPort()).run();
+		        		//new Client(model.getAddress(), model.getPort()).run();
 		    	    	//view.removePanel();
+			        	System.out.println("Button 2 pressed");
 			        }
 				});
 			case 2:
 				button.addActionListener(new ActionListener() {  
 			        public void actionPerformed(ActionEvent e) {
-		        		new DBMenu();
-		    	    	view.removePanel();
+//		        		new DBMenu();
+//		    	    	view.removePanel();
+		        		System.out.println("Button 3 pressed");
 			        }
 				});
 				break;
-//			case 3:
-//				button.addActionListener(new ActionListener() {  
-//			        public void actionPerformed(ActionEvent e) {
-////		        		Joiner j = new Joiner(model.getAddress(), model.getPort());
-////		    			Thread t_j = new Thread(j);
-////		    			t_j.start();
-//		    	    	view.removePanel();
-//			        }
-//				});
-//				break;
-//			case 4:
-//				button.addActionListener(new ActionListener() {  
-//			        public void actionPerformed(ActionEvent e) {
-////		        		new ScoreWindow();
-//			        }
-//				});
-//				break;
 		}
+		
 	}
 }

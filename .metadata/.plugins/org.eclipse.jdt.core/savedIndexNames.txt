@@ -1,0 +1,3 @@
+INDEX VERSION 1.129+X:\My Documents\NetComputing\.metadata\.plugins\org.eclipse.jdt.core
+3286538573.index
+3888922129.index
