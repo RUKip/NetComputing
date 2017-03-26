@@ -10,7 +10,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-public class Database implements RemoteDatabase{
+
+/*
+ * The database is now made for Employees - needs to be changed 
+ * to connections.
+ * 
+ */
+public class Database //implements RemoteDatabase{
+	{
 	
 	private EntityManagerFactory emf;
 	private EntityManager em;
