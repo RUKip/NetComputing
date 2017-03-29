@@ -1,0 +1,3 @@
+grant codeBase "file:/Programaer/NetComputing/RMIPractice/-" {
+    permission java.security.AllPermission;
+};
