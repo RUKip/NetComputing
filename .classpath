@@ -2,91 +2,89 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/build/libs/gs-rest-service-0.1.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/build/libs/netComputing-0.1.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/aopalliance-1.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/aopalliance-1.0-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/builder-model-2.2.0-alpha6.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/classmate-1.3.3.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/commons-logging-1.2-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/dependency-management-plugin-1.0.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/easypermissions-0.2.1-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/external-system-rt.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-api-client-1.22.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-api-client-1.22.0-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-api-client-android-1.22.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-api-client-android-1.22.0-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-api-services-calendar-v3-rev225-1.22.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-api-services-calendar-v3-rev225-1.22.0-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-http-client-1.22.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-http-client-1.22.0-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-http-client-android-1.22.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-http-client-android-1.22.0-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-http-client-jackson2-1.22.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-http-client-jackson2-1.22.0-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-oauth-client-1.22.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/google-oauth-client-1.22.0-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/gradle-appengine-builder-model-0.1.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/gradle-base-services-2.14.1.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/gradle-core-2.14.1.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/gradle-tooling-api-2.14.1.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/gradle-tooling-extension-api.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/guava-jdk5-17.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/guava-jdk5-17.0-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/hamcrest-core-1.3.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/hamcrest-core-1.3-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/hibernate-validator-5.3.4.Final.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/jackson-annotations-2.8.0.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/jackson-core-2.1.3.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/jackson-core-2.1.3-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/jackson-core-2.8.7.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/jackson-databind-2.8.7.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/jboss-logging-3.3.0.Final.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/jcl-over-slf4j-1.7.24.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/jsr305-1.3.9.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/jul-to-slf4j-1.7.24.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/junit-4.12-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/log4j-over-slf4j-1.7.24.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/logback-classic-1.1.11.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/logback-core-1.1.11.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/slf4j-api-1.7.21.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/slf4j-api-1.7.21-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/slf4j-api-1.7.24.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/snakeyaml-1.17.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-aop-4.1.6.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-aop-4.1.6.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-aop-4.3.7.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-beans-4.1.6.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-beans-4.1.6.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-beans-4.3.7.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-boot-1.5.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-boot-autoconfigure-1.5.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-boot-gradle-plugin-1.5.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-boot-loader-tools-1.5.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-boot-starter-1.5.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-boot-starter-logging-1.5.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-boot-starter-tomcat-1.5.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-boot-starter-web-1.5.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-context-4.1.6.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-context-4.1.6.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-context-4.3.7.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-core-4.1.6.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-core-4.1.6.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-core-4.3.7.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-expression-4.1.6.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-expression-4.1.6.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-expression-4.3.7.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-web-4.1.6.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-web-4.1.6.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-web-4.3.7.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/spring-webmvc-4.3.7.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/tomcat-embed-core-8.5.11.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/tomcat-embed-el-8.5.11.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/tomcat-embed-websocket-8.5.11.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/validation-api-1.1.0.Final.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/caches/velocity.jar"/>
-	<classpathentry kind="lib" path="D:/Programaer/NetComputing/objectdb.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/aopalliance-1.0-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/builder-model-2.2.0-alpha6.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/classmate-1.3.3.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/commons-logging-1.2-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/dependency-management-plugin-1.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/easypermissions-0.2.1-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/external-system-rt.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-api-client-1.22.0.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-api-client-1.22.0-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-api-client-android-1.22.0.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-api-client-android-1.22.0-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-api-services-calendar-v3-rev225-1.22.0.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-api-services-calendar-v3-rev225-1.22.0-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-http-client-1.22.0.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-http-client-1.22.0-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-http-client-android-1.22.0.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-http-client-android-1.22.0-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-http-client-jackson2-1.22.0.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-http-client-jackson2-1.22.0-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-oauth-client-1.22.0.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/google-oauth-client-1.22.0-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/gradle-appengine-builder-model-0.1.0.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/gradle-base-services-2.14.1.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/gradle-core-2.14.1.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/gradle-tooling-api-2.14.1.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/gradle-tooling-extension-api.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/guava-jdk5-17.0.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/guava-jdk5-17.0-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/hamcrest-core-1.3-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/hibernate-validator-5.3.4.Final.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/jackson-annotations-2.8.0.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/jackson-core-2.1.3.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/jackson-core-2.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/jackson-core-2.8.7.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/jackson-databind-2.8.7.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/javax.jms-3.1.2.2.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/jboss-logging-3.3.0.Final.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/jcl-over-slf4j-1.7.24.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/jsr305-1.3.9.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/jul-to-slf4j-1.7.24.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/junit-4.12-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/log4j-over-slf4j-1.7.24.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/logback-classic-1.1.11.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/logback-core-1.1.11.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/slf4j-api-1.7.21.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/slf4j-api-1.7.21-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/slf4j-api-1.7.24.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/snakeyaml-1.17.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-aop-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-aop-4.1.6.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-aop-4.3.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-beans-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-beans-4.1.6.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-beans-4.3.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-boot-1.5.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-boot-autoconfigure-1.5.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-boot-gradle-plugin-1.5.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-boot-loader-tools-1.5.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-boot-starter-1.5.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-boot-starter-logging-1.5.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-boot-starter-tomcat-1.5.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-boot-starter-web-1.5.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-context-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-context-4.1.6.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-context-4.3.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-core-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-core-4.1.6.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-core-4.3.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-expression-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-expression-4.1.6.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-expression-4.3.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-web-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-web-4.1.6.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-web-4.3.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/spring-webmvc-4.3.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/tomcat-embed-core-8.5.11.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/tomcat-embed-el-8.5.11.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/tomcat-embed-websocket-8.5.11.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/validation-api-1.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/velocity.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
