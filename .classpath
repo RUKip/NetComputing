@@ -86,5 +86,7 @@
 	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/tomcat-embed-websocket-8.5.11.jar"/>
 	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/validation-api-1.1.0.Final.jar"/>
 	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/velocity.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/amqp-client-4.1.0.jar"/>
+	<classpathentry kind="lib" path="X:/My Documents/New/NetComputing/caches/amqp-client-4.1.0-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
