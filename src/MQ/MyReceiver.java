@@ -11,13 +11,6 @@ public class MyReceiver {
   public static void main(String[] argv) throws Exception {
     ConnectionFactory factory = new ConnectionFactory();
     factory.setHost("localhost");
-<<<<<<< HEAD
-    ConnectionObject connection = factory.newConnection();
-    Channel channel = connection.createChannel();
-=======
-    final Connection connection = factory.newConnection();
-    final Channel channel = connection.createChannel();
->>>>>>> 0d206f2f727a9bd630dfb93d161141226bb39c91
 
     channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
     System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
