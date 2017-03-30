@@ -1,17 +1,14 @@
-package Database;
-
-
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class Connection implements Serializable {
+public class ConnectionObject implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private InetAddress ip;
 	private int port;
 	
-	public Connection(String address, int port) {
+	public ConnectionObject(String address, int port) {
 		try {
 			this.ip = InetAddress.getByName(address);
 			this.port = port;
@@ -29,7 +26,7 @@ public class Connection implements Serializable {
 	}
 	
 	public boolean equals(Object o){
-		Connection toCompare = (Connection) o;
+		ConnectionObject toCompare = (ConnectionObject) o;
 		return (ip.equals(toCompare.ip) && this.port == toCompare.port);
 	}
 }
