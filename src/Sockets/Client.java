@@ -18,7 +18,7 @@ public class Client implements Runnable {
 	private static final int WAIT_TIME = 600;
 	private static final long RESPONSE_INTERVAL = 5000; //5 sec
 	
-	private ArrayList<Connection> servers; //TODO: updated by a global database?? Maybe use REST/SOAP for this??
+	private ArrayList<Connection> servers; //TODO: updated by a global database??
 
 	protected Socket socket;
 	
@@ -32,7 +32,7 @@ public class Client implements Runnable {
 	
 	public Client(String serverAddress, int serverPort) {
 		servers = new ArrayList<>();
-		servers.add(new Connection(serverAddress, serverPort)); //TODO: for now to test
+		servers.add(new Connection(serverAddress, serverPort)); //TODO: for now to test, should be filled with actual mulitple servers
 	}
 	
 	protected boolean connectToServer(Connection connection) { //connects to server and tries turning it on, returns true if succeeded
@@ -48,7 +48,7 @@ public class Client implements Runnable {
 			
 			System.out.println("I send my request to the server");
 			
-			//TODO: check if this works
+			//TODO: check if this works on two computers
 			Message response;
 
             try {
@@ -62,7 +62,6 @@ public class Client implements Runnable {
 				    	//try another computer
 				    	return false;
 				    }
-				    //TODO: now bound to wait for a response, should stop waiting after some time
 				    if(System.currentTimeMillis() > startingTime + RESPONSE_INTERVAL) return false;
 				}
 			} catch (ClassNotFoundException e) {

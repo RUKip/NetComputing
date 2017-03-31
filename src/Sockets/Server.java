@@ -14,7 +14,7 @@ public class Server implements Runnable {
 	
 	private ServerSocket serverSocket;
 
-	private boolean serverBusy = false; //TODO: Will be accessed by multiple thread so is volatile
+	private volatile boolean serverBusy = false;
 	
 	protected Connection clientConnection;
 	private Message message;
@@ -47,9 +47,9 @@ public class Server implements Runnable {
 				
 			Socket socket;
 			try {
-				System.out.println("waiting for server to connect");
+				System.out.println("Server waitng for connection");
 				socket = serverSocket.accept();
-				System.out.println("accepted server");
+				System.out.println("server accepted a client");
 				new InputHandler(this, socket).run();
 			} catch (IOException e1) {
 				e1.printStackTrace();
@@ -58,14 +58,7 @@ public class Server implements Runnable {
 			executionTime -= System.currentTimeMillis();
 			sleepTime = 40 + executionTime;
 			
-			if(serverBusy){
-				//TODO: if server not already busy, active the rest of the server(stop idling) 
-				System.out.println("I am Busy so don't accept requests");
-			}else{
-				//TODO: if server not already not busy, stop the rest of the server (start idling)
-				System.out.println("I am not busy, so Now starting");
-			}
-			
+
 			try {
 				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
