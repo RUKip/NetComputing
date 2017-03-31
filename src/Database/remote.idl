@@ -1,8 +1,0 @@
-module Database{
-	interface RemoteDatabase{
-		
-		sequence<octet> byteArray;
-		byteArray getAll();
-		oneway void add (byteArray);
-	};
-};
