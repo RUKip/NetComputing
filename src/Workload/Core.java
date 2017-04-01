@@ -4,32 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import MQ.MyReceiver;
+
 public class Core implements Runnable, Comparable<Core> {
 	
 	private int number, capacity, workload;
 	private boolean run;
 	private List<Task> taskList = new ArrayList<Task>();
 	private Random r = new Random();
+	private MyReceiver receiver;
 
 	public Core(int i, int capacity) {
 		this.number = i;
 		this.capacity = capacity;
 		this.workload = 0;
+		this.run();
 	}
 	
 	@Override
 	public void run() {
 		run = true;
+
+		System.out.println("core running");
+		try {
+			this.receiver = new MyReceiver(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		while(run) {
 			updateTasks();
 			updateWorkload();
 			try {
-			    Thread.sleep(1000);                 //1000 milliseconds is one second.
+			    Thread.sleep(1000);                 
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
 		}
-		
+		receiver.stop();
 	}
 
 	private void updateTasks() {
