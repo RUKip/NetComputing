@@ -50,17 +50,22 @@ public class Server implements Runnable {
 				System.out.println("Server waitng for connection");
 				socket = serverSocket.accept();
 				System.out.println("server accepted a client");
-				new InputHandler(this, socket).run();
+				InputHandler handler = new InputHandler(this,socket);
+				handler.run();
+//				System.out.println("Goes wrong?");
+
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 
-			executionTime -= System.currentTimeMillis();
-			sleepTime = 40 + executionTime;
+			executionTime = System.currentTimeMillis();
+			sleepTime = 100;
 			
 
 			try {
+
 				Thread.sleep(sleepTime);
+//				System.out.println("Sleeping goes wrong?");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

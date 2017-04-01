@@ -23,9 +23,7 @@ public class InputHandler implements Runnable {
 		try {
 			ObjectInputStream inStream = new ObjectInputStream(socket.getInputStream());
 			message = (Message) inStream.readObject();
-			
-			
-			
+	
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -67,12 +65,15 @@ public class InputHandler implements Runnable {
 				Message message = receiveMessage();
 				
 				System.out.println("Client: " + message.getData());	//TODO: now just for showing it works.
-				
+//				System.out.println("trying to respond");
 				respond();
+//				System.out.println("respod happened");
 					
 				try {
 					socket.close();
+					System.out.println("Socket was closed");
 				} catch (IOException e) {
+					System.out.println("Goes wrong here");
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
