@@ -19,9 +19,7 @@ public class MySender {
 
     String message = getMessage(argv);
 
-    channel.basicPublish("", TASK_QUEUE_NAME,
-        MessageProperties.PERSISTENT_TEXT_PLAIN,
-        message.getBytes("UTF-8"));
+    channel.basicPublish("", TASK_QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes("UTF-8"));
     System.out.println(" [x] Sent '" + message + "'");
 
     channel.close();

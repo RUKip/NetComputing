@@ -94,10 +94,13 @@ public class Client implements Runnable {
 	public void run() {
 		while(true){
 			checkTooMuchEnergy();
+			System.out.println(" checked for too much energy" );
 			if(tooMuchEnergy){
+				System.out.println(" too much energy" );
 				for(Connection server : servers){
 					message = new Message(Message.CHECK_TYPE, Message.CHECK_MESSAGE);
 					boolean serverStarted = connectToServer(server); //response of connected server, true if server was idle and started 
+					System.out.println("client connected to server");
 					if(serverStarted){
 						tooMuchEnergy = false;
 						break;
