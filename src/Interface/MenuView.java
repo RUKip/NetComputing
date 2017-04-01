@@ -100,7 +100,7 @@ public class MenuView extends JFrame {
 
         //enter server address
         JLabel serverAddressLabel = new JLabel("server-address:port");
-        JTextField serverAddressField = new JTextField("localhost:8850"); 
+        JTextField serverAddressField = new JTextField("192.168.0.10:8850"); 
 
         JButton setServerButton = new JButton("Set address");
         

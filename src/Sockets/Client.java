@@ -41,12 +41,20 @@ public class Client implements Runnable {
 		
 		try {
 			socket = new Socket(connection.getIp(), connection.getPort());
-			out = new ObjectOutputStream(socket.getOutputStream());
-			is = new ObjectInputStream(socket.getInputStream());
+//			System.out.println("I made new socket" );
 
-			out.writeObject(message);
+			out = new ObjectOutputStream(socket.getOutputStream());
+//			System.out.println("I made objectoutputstream");
+		
 			
-			System.out.println("I send my request to the server");
+			out.writeObject(message);
+//			System.out.println("I send my request to the server");
+			
+			out.flush();
+			
+			is = new ObjectInputStream(socket.getInputStream());
+//			System.out.println("I made ojbect input stream");
+
 			
 			//TODO: check if this works on two computers
 			Message response;
@@ -94,9 +102,9 @@ public class Client implements Runnable {
 	public void run() {
 		while(true){
 			checkTooMuchEnergy();
-			System.out.println(" checked for too much energy" );
+//			System.out.println(" checked for too much energy" );
 			if(tooMuchEnergy){
-				System.out.println(" too much energy" );
+//				System.out.println(" too much energy" );
 				for(Connection server : servers){
 					message = new Message(Message.CHECK_TYPE, Message.CHECK_MESSAGE);
 					boolean serverStarted = connectToServer(server); //response of connected server, true if server was idle and started 
