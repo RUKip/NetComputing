@@ -15,11 +15,13 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Client implements Runnable {
 
 	//WAIT_TIME in milliseconds after sending request before check if energy usage decreased;
-	private static final int WAIT_TIME = 600;
+	private static final int WAIT_TIME = 3000;
 	private static final long RESPONSE_INTERVAL = 5000; //5 sec
 	
 	private ArrayList<Connection> servers; //TODO: updated by a global database??
 
+	private Connection guiConnection;
+	
 	protected Socket socket;
 	
 	protected int lastPackageId;
@@ -32,7 +34,7 @@ public class Client implements Runnable {
 	
 	public Client(String serverAddress, int serverPort) {
 		servers = new ArrayList<>();
-		servers.add(new Connection(serverAddress, serverPort)); //TODO: for now to test, should be filled with actual mulitple servers
+		guiConnection = new Connection(serverAddress, serverPort); //TODO: for now to test, should be filled with actual mulitple servers
 	}
 	
 	protected boolean connectToServer(Connection connection) { //connects to server and tries turning it on, returns true if succeeded
@@ -41,12 +43,20 @@ public class Client implements Runnable {
 		
 		try {
 			socket = new Socket(connection.getIp(), connection.getPort());
-			out = new ObjectOutputStream(socket.getOutputStream());
-			is = new ObjectInputStream(socket.getInputStream());
+//			System.out.println("I made new socket" );
 
-			out.writeObject(message);
+			out = new ObjectOutputStream(socket.getOutputStream());
+//			System.out.println("I made objectoutputstream");
+		
 			
-			System.out.println("I send my request to the server");
+			out.writeObject(message);
+//			System.out.println("I send my request to the server");
+			
+			out.flush();
+			
+			is = new ObjectInputStream(socket.getInputStream());
+//			System.out.println("I made ojbect input stream");
+
 			
 			//TODO: check if this works on two computers
 			Message response;
@@ -89,14 +99,23 @@ public class Client implements Runnable {
 		System.out.println("Random Nr: " + randomNr);
 	}
 	
+	
+	private ArrayList<Connection> updateList(){
+		ArrayList<Connection> list = new ArrayList<Connection>();
+		
+		
+		return list;
+	}
 
 	@Override
 	public void run() {
 		while(true){
+			servers = updateList();
+			servers.add(guiConnection);
 			checkTooMuchEnergy();
-			System.out.println(" checked for too much energy" );
+//			System.out.println(" checked for too much energy" );
 			if(tooMuchEnergy){
-				System.out.println(" too much energy" );
+//				System.out.println(" too much energy" );
 				for(Connection server : servers){
 					message = new Message(Message.CHECK_TYPE, Message.CHECK_MESSAGE);
 					boolean serverStarted = connectToServer(server); //response of connected server, true if server was idle and started 
