@@ -41,6 +41,7 @@ public class Server implements Runnable {
 	
 	@Override
 	public void run() {
+			System.out.println("Running");
 		long executionTime, sleepTime;
 		while (true) {
 			executionTime = System.currentTimeMillis();
