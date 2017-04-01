@@ -2,16 +2,15 @@
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-import Sockets.Connection;
 import Sockets.Message;
 
 
@@ -33,6 +32,8 @@ public class Client implements Runnable {
 	protected Socket socket;
 	
 	protected int lastPackageId;
+	
+	private boolean initialStartup = true;
 	
 	protected Message message;
 	
@@ -110,31 +111,33 @@ public class Client implements Runnable {
 	
 	private List<ConnectionObject> updateList(){
 		List<ConnectionObject> list = new ArrayList<ConnectionObject>();
-		
+		System.out.println(" updating list" );
 		try{  
 			String databaseAddress = "rmi://192.168.0.10:8851/wonderland";
-			String addressAddedComputer;
-			int portAddedComputer;
+//			String addressAddedComputer;
+			int portAddedComputer = 8851;
 			
 	        int port = 8851;
 
-	        try { // special exception handler for registry creation
-	            LocateRegistry.createRegistry(port);
-	            System.out.println("java RMI registry created.");
-	        } catch (RemoteException e) {
-	            // do nothing, error means registry already exists
-	            System.out.println("java RMI registry already exists.");
+	        if(initialStartup){
+		        try { // special exception handler for registry creation
+		            LocateRegistry.createRegistry(port);
+		            System.out.println("java RMI registry created.");
+		        } catch (RemoteException e) {
+		            // do nothing, error means registry already exists
+		            System.out.println("java RMI registry already exists.");
+		        }
 	        }
-			
-			Scanner s = new Scanner(System.in);
-			System.out.println("Type Address(Ip):");
-			addressAddedComputer = s.nextLine();
-			System.out.println("Type port:");
-			portAddedComputer = s.nextInt();
-			
+	        
+	        String addressAddedComputer = InetAddress.getLocalHost().getHostAddress();
+	        
+	        
 			DatabaseRemote stub=(DatabaseRemote)
-					Naming.lookup(databaseAddress);  
-			stub.addComputer(addressAddedComputer, portAddedComputer);
+					Naming.lookup(databaseAddress);
+			if(initialStartup){
+				initialStartup = false;
+				stub.addComputer(addressAddedComputer, portAddedComputer);
+			}
 			list = stub.getConnections();
 			System.out.println(stub.getConnections().size()); 
 			}catch(Exception e){System.out.println("Something went wong");}  

@@ -31,7 +31,9 @@ public class MenuController {
 			case 1:
 				button.addActionListener(new ActionListener() {  
 			        public void actionPerformed(ActionEvent e) {
+			        	System.out.println(" clicked client button" );
 		        		new Client(model.getAddress(), model.getPort()).run();
+		        		System.out.println(" started a client " );
 		    	    	//view.removePanel();
 			        }
 				});
