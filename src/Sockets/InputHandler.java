@@ -13,12 +13,13 @@ public class InputHandler implements Runnable {
 	public InputHandler(Server server, Socket socket) {
 		this.server = server;
 		this.socket = socket;
+		System.out.println("completed making inputhandler");
 	}
 
 	
 	protected Message receiveMessage() {
 		Message message = null;
-		
+		System.out.println("receiving message");
 		try {
 			ObjectInputStream inStream = new ObjectInputStream(socket.getInputStream());
 			message = (Message) inStream.readObject();
@@ -36,6 +37,7 @@ public class InputHandler implements Runnable {
 	
 	
 	private void sendMessage(Message m){
+		System.out.println("sending a message back to client");
 	    try {
 			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 		    out.flush();
