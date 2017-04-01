@@ -3,6 +3,7 @@ package MQ;
 import com.rabbitmq.client.*;
 import Workload.Core;
 import Workload.Processor;
+import Workload.Task;
 
 import java.io.IOException;
 
@@ -42,15 +43,28 @@ public class MyReceiver {
 			  String message = new String(body, "UTF-8");
 		
 		      System.out.println(" [x] Received '" + message + "'");
+			  boolean refused = false;
 			  try {
-				  if (core == null)
-					  doWork(message);
-				  else {
-					  System.out.println("core received task");
+				  Task t = new Task(message);
+				  if (t.getLoadperSec() > core.getCapacity() - core.getWorkload()) {
+					  System.out.println(" [x] refused");
+					  channel.basicNack(envelope.getDeliveryTag(), false, true);
+					  refused = true;
+				  } else {
+					  refused = false;
+					  core.addTask(t);
 				  }
 			  } finally {
-				  System.out.println(" [x] Done");
-				  channel.basicAck(envelope.getDeliveryTag(), false);
+				  if (refused)
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				  else {
+					  System.out.println(" [x] Done");
+					  channel.basicAck(envelope.getDeliveryTag(), false);
+				  }
 			  }
 		  }
 	  };

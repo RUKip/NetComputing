@@ -18,7 +18,6 @@ public class Core implements Runnable, Comparable<Core> {
 		this.number = i;
 		this.capacity = capacity;
 		this.workload = 0;
-		this.run();
 	}
 	
 	@Override
