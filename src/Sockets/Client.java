@@ -15,11 +15,13 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Client implements Runnable {
 
 	//WAIT_TIME in milliseconds after sending request before check if energy usage decreased;
-	private static final int WAIT_TIME = 600;
+	private static final int WAIT_TIME = 3000;
 	private static final long RESPONSE_INTERVAL = 5000; //5 sec
 	
 	private ArrayList<Connection> servers; //TODO: updated by a global database??
 
+	private Connection guiConnection;
+	
 	protected Socket socket;
 	
 	protected int lastPackageId;
@@ -32,7 +34,7 @@ public class Client implements Runnable {
 	
 	public Client(String serverAddress, int serverPort) {
 		servers = new ArrayList<>();
-		servers.add(new Connection(serverAddress, serverPort)); //TODO: for now to test, should be filled with actual mulitple servers
+		guiConnection = new Connection(serverAddress, serverPort); //TODO: for now to test, should be filled with actual mulitple servers
 	}
 	
 	protected boolean connectToServer(Connection connection) { //connects to server and tries turning it on, returns true if succeeded
@@ -97,10 +99,19 @@ public class Client implements Runnable {
 		System.out.println("Random Nr: " + randomNr);
 	}
 	
+	
+	private ArrayList<Connection> updateList(){
+		ArrayList<Connection> list = new ArrayList<Connection>();
+		
+		
+		return list;
+	}
 
 	@Override
 	public void run() {
 		while(true){
+			servers = updateList();
+			servers.add(guiConnection);
 			checkTooMuchEnergy();
 //			System.out.println(" checked for too much energy" );
 			if(tooMuchEnergy){
