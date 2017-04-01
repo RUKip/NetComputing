@@ -7,6 +7,12 @@ import Workload.Task;
 
 import java.io.IOException;
 
+/*
+ * To be able to run this:
+ * include the jar files in NetComputing/caches
+ * Install RabbitMQServer (which requires Erlang)
+ */
+
 public class MyReceiver {
 
   private static final String TASK_QUEUE_NAME = "task_queue";
@@ -24,7 +30,7 @@ public class MyReceiver {
 //		core = null;
 //	    init();
 //	    channel.basicConsume(TASK_QUEUE_NAME, false, consumer);
-		new Processor(1,10);
+		new Processor(1,12);
 	}
 
   private static void init() throws Exception {
@@ -54,7 +60,6 @@ public class MyReceiver {
 				  }
 			  } finally {
 				  if (refused) {
-					  System.out.println(" [x] refused");
 					  channel.basicNack(envelope.getDeliveryTag(), false, true);
 						try {
 							Thread.sleep(1000);

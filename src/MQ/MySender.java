@@ -47,6 +47,10 @@ public class MySender {
     channel.close();
     connection.close();
   }
+  
+  public void addTask(Task t) {
+	  q.add(t);
+  }
 
 //  private static String getMessage(String[] strings) {
 //    if (strings.length < 1)
