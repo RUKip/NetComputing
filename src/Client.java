@@ -4,8 +4,9 @@ import java.util.ArrayList;
 public class Client {
 	public static void main(String args[]){  
 		try{  
-			DatabaseRemote stub=(DatabaseRemote)Naming.lookup("rmi://localhost:6666/wonderland");  
-			stub.addComputer("192.0.0.1", 10);
+			DatabaseRemote stub=(DatabaseRemote)
+					Naming.lookup("rmi://192.168.0.10:8851/wonderland");  
+			stub.addComputer("AliceInWonderland", 10);
 			System.out.println(stub.getConnections().size()); 
 			}catch(Exception e){System.out.println("Something went wong");}  
 	}  
