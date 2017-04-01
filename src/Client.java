@@ -14,6 +14,7 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 import Sockets.Message;
+import Sockets.SocketServer;
 
 
 //TODO: change names of client server to sender receiver
@@ -28,10 +29,10 @@ public class Client implements Runnable {
 	private static final long RESPONSE_INTERVAL = 5000; //5 sec
 	
 	private List<ConnectionObject> servers;
-
-	private ConnectionObject guiConnection;
 	
 	protected Socket socket;
+	
+	private SocketServer s;
 	
 	protected int lastPackageId;
 	
@@ -39,13 +40,14 @@ public class Client implements Runnable {
 	
 	protected Message message;
 	
-	private boolean tooMuchEnergy= false;
+	private boolean tooMuchEnergy= false, tooLowEnergy = false;
 	
 //	Logger logger = LoggerFactory.getLogger(Server.class);
 	
-	public Client(String serverAddress, int serverPort) {
+	public Client(SocketServer s) {
 		servers = new ArrayList<>();
-		//guiConnection = new ConnectionObject(serverAddress, serverPort); //TODO: for now to test, should be filled with actual mulitple servers
+		this.s = s;
+		s.run();
 	}
 	
 	protected boolean connectToServer(ConnectionObject connection) { //connects to server and tries turning it on, returns true if succeeded
@@ -104,9 +106,10 @@ public class Client implements Runnable {
 	}
 	
 	//TODO: implement (now its randomly simulated too much energy)
-	private void checkTooMuchEnergy(){  //Energy usage check, set tooMuchEnergy true if threshold reached
+	private void checkEnergyLvl(){  //Energy usage check, set tooMuchEnergy true if threshold reached
 		int randomNr = ThreadLocalRandom.current().nextInt(0, 100+1);
 		tooMuchEnergy = (randomNr>90);
+		tooLowEnergy = (randomNr<10);
 		System.out.println("Random Nr: " + randomNr);
 	}
 	
@@ -115,7 +118,7 @@ public class Client implements Runnable {
 		List<ConnectionObject> list = new ArrayList<ConnectionObject>();
 		System.out.println("updating list");
 		try{  
-			String databaseAddress = "rmi://192.168.0.9:8851/wonderland"; //HARDCODED RMI SERVER
+			String databaseAddress = "rmi://localhost:8851/wonderland";//"rmi://192.168.0.9:8851/wonderland"; //HARDCODED RMI SERVER
 			int port = 8851; //PORT RMI SERVER
 			
 
@@ -159,8 +162,7 @@ public class Client implements Runnable {
 	public void run() {
 		while(true){
 			servers = updateList();
-			//servers.add(guiConnection);
-			checkTooMuchEnergy();
+			checkEnergyLvl();
 //			System.out.println(" checked for too much energy" );
 			if(tooMuchEnergy){
 //				System.out.println(" too much energy" );
@@ -173,6 +175,8 @@ public class Client implements Runnable {
 						break;
 					}
 				}
+			}else if(tooLowEnergy){
+				s.setBusy(false);
 			}
 			try {
 				Thread.sleep(WAIT_TIME);
@@ -183,6 +187,7 @@ public class Client implements Runnable {
 	}
 	
 	public static void main(String[] argv){
-		new Client("192.168.0.10", 8850).run();
+		SocketServer s = new SocketServer();
+		new Client(s).run();
 	}
 }

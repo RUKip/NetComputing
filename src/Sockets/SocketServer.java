@@ -35,16 +35,19 @@ public class SocketServer implements Runnable {
 		return serverBusy;
 	}
 	
-	public void setBusy(boolean value){
+	//TODO: this is a simulation, in the actual implementation for this program you should idle/unidle the server he
+	public synchronized void setBusy(boolean value){
 		serverBusy = value;
+		if(value){
+			//activate server here
+		}
 	}
 	
 	@Override
 	public void run() {
 			System.out.println("Running");
-		long executionTime, sleepTime;
+		long sleepTime;
 		while (true) {
-			executionTime = System.currentTimeMillis();
 				
 			Socket socket;
 			try {
@@ -58,8 +61,7 @@ public class SocketServer implements Runnable {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-
-			executionTime = System.currentTimeMillis();
+			
 			sleepTime = 100;
 			
 

@@ -46,7 +46,6 @@ public class InputHandler implements Runnable {
 		}
 	}
 
-	//TODO: this is a simulation, in the actual implementation for this program you should idle/unidle the server he
 	private synchronized void respond(){ //respond to client request
 		if(server.isBusy()){
 			//return to client message that server is already busy and it should keep searching

@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import Sockets.SocketServer;
+
 
 
 public class MenuController {
@@ -32,7 +34,8 @@ public class MenuController {
 				button.addActionListener(new ActionListener() {  
 			        public void actionPerformed(ActionEvent e) {
 			        	System.out.println(" clicked client button" );
-		        		new Client(model.getAddress(), model.getPort()).run();
+			        	SocketServer s = new SocketServer();
+			        	new Client(s).run();
 		        		System.out.println(" started a client " );
 		    	    	//view.removePanel();
 			        }
