@@ -5,10 +5,12 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.rmi.Naming;
+import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 import Sockets.Message;
@@ -25,7 +27,7 @@ public class Client implements Runnable {
 	private static final int WAIT_TIME = 3000;
 	private static final long RESPONSE_INTERVAL = 5000; //5 sec
 	
-	private List<ConnectionObject> servers; //TODO: updated by a global database??
+	private List<ConnectionObject> servers;
 
 	private ConnectionObject guiConnection;
 	
@@ -43,7 +45,7 @@ public class Client implements Runnable {
 	
 	public Client(String serverAddress, int serverPort) {
 		servers = new ArrayList<>();
-		guiConnection = new ConnectionObject(serverAddress, serverPort); //TODO: for now to test, should be filled with actual mulitple servers
+		//guiConnection = new ConnectionObject(serverAddress, serverPort); //TODO: for now to test, should be filled with actual mulitple servers
 	}
 	
 	protected boolean connectToServer(ConnectionObject connection) { //connects to server and tries turning it on, returns true if succeeded
@@ -111,36 +113,44 @@ public class Client implements Runnable {
 	
 	private List<ConnectionObject> updateList(){
 		List<ConnectionObject> list = new ArrayList<ConnectionObject>();
-		System.out.println(" updating list" );
+		System.out.println("updating list");
 		try{  
-			String databaseAddress = "rmi://192.168.0.10:8851/wonderland";
-//			String addressAddedComputer;
-			int portAddedComputer = 8851;
+			String databaseAddress = "rmi://192.168.0.9:8851/wonderland"; //HARDCODED RMI SERVER
+			int port = 8851; //PORT RMI SERVER
 			
-	        int port = 8851;
 
-	        if(initialStartup){
-		        try { // special exception handler for registry creation
-		            LocateRegistry.createRegistry(port);
-		            System.out.println("java RMI registry created.");
-		        } catch (RemoteException e) {
-		            // do nothing, error means registry already exists
-		            System.out.println("java RMI registry already exists.");
-		        }
+	        try { // special exception handler for registry creation
+	            LocateRegistry.createRegistry(port);
+	            System.out.println("java RMI registry created.");
+	        } catch (RemoteException e) {
+	            // do nothing, error means registry already exists
+	            System.out.println("java RMI registry already exists.");
 	        }
-	        
-	        String addressAddedComputer = InetAddress.getLocalHost().getHostAddress();
-	        
 	        
 			DatabaseRemote stub=(DatabaseRemote)
 					Naming.lookup(databaseAddress);
+			
 			if(initialStartup){
+				//BELOW IS FOR SOCKET CONNECTION
+//				String addressAddedComputer;
+				System.out.println("pls give your ip address:");
+				Scanner s = new Scanner(System.in);
+				String address = s.nextLine();
+				s.close();
+				System.out.println("Read: " + address);
+				
+				int portAddedComputer = 8850;
+				
 				initialStartup = false;
-				stub.addComputer(addressAddedComputer, portAddedComputer);
+				System.out.println("added this computer to the RMI server");
+				stub.addComputer(address, portAddedComputer);
 			}
-			list = stub.getConnections();
-			System.out.println(stub.getConnections().size()); 
-			}catch(Exception e){System.out.println("Something went wong");}  
+				list = stub.getConnections();
+				System.out.println(stub.getConnections().size()); 
+			}catch(Exception e){		        	
+				System.out.println(e.getMessage());
+				System.out.println("Something went wong");
+			}  
 		
 		return list;
 	}
@@ -149,7 +159,7 @@ public class Client implements Runnable {
 	public void run() {
 		while(true){
 			servers = updateList();
-			servers.add(guiConnection);
+			//servers.add(guiConnection);
 			checkTooMuchEnergy();
 //			System.out.println(" checked for too much energy" );
 			if(tooMuchEnergy){
@@ -170,5 +180,9 @@ public class Client implements Runnable {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static void main(String[] argv){
+		new Client("192.168.0.10", 8850).run();
 	}
 }

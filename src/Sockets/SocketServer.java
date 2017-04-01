@@ -24,7 +24,7 @@ public class SocketServer implements Runnable {
 	public SocketServer() {
 		try {
 				System.out.println("made server object");
-				serverSocket = new ServerSocket(8850); //TODO: why 8850???
+				serverSocket = new ServerSocket(8850); //TODO: hardcoded 8850, so always connect to 8850 in the socketaddress
 		} catch (IOException e) {
 //			logger.error("Unable to intialize socket");
 			e.printStackTrace();

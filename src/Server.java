@@ -8,7 +8,7 @@ public class Server{
 	public static void main(String args[])throws Exception{
 		DatabaseImpl databaseImplementation = new DatabaseImpl();
 		
-		int port = 8851;
+		int port = 8851; //HARDCODED RMI PORT
 
 	    try { // special exception handler for registry creation
 	        LocateRegistry.createRegistry(port);
@@ -18,7 +18,7 @@ public class Server{
 	        System.out.println("java RMI registry already exists.");
 	    }	
 
-	    String hostname = "192.168.0.10";
+	    String hostname = "192.168.0.9"; //HARDCODED TO RMI SERVER
 
 	    String bindLocation = "//" + hostname + ":" + port + "/wonderland";
 
