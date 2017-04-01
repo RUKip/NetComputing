@@ -26,10 +26,8 @@ public class MyReceiver {
 	    channel.basicConsume(TASK_QUEUE_NAME, false, consumer);
 	}
 
+	//for testing purposes
 	public static void main(String[] argv) throws Exception {
-//		core = null;
-//	    init();
-//	    channel.basicConsume(TASK_QUEUE_NAME, false, consumer);
 		new Processor(1,12);
 	}
 
@@ -82,18 +80,6 @@ public class MyReceiver {
 		e.printStackTrace();
 	}
   }
-
-//	private static void doWork(String task) {
-//		for (char ch : task.toCharArray()) {
-//			if (ch == '.') {
-//			  try {
-//				  Thread.sleep(1000);
-//			  } catch (InterruptedException _ignored) {
-//				  Thread.currentThread().interrupt();
-//			  }
-//	      }
-//    }
-//  }
 }
 
 
