@@ -31,8 +31,10 @@ public class Core implements Runnable, Comparable<Core> {
 			e.printStackTrace();
 		}
 		while(run) {
-			updateTasks();
 			updateWorkload();
+			if (this.workload != 0)
+				System.out.println("Workload: " + this.workload);
+			updateTasks();
 			try {
 			    Thread.sleep(1000);                 
 			} catch(InterruptedException ex) {
@@ -44,7 +46,14 @@ public class Core implements Runnable, Comparable<Core> {
 
 	private void updateTasks() {
 		for (int i = 0; i < taskList.size(); i++) {
-			taskList.get(i).decrementDuration();
+			Task t = taskList.get(i);
+			if (t.getDuration() > 1)
+				t.decrementDuration();
+			else {
+				taskList.remove(i);
+				System.out.println("completed task!");
+			}
+			
 		}
 	}
 
@@ -84,6 +93,15 @@ public class Core implements Runnable, Comparable<Core> {
 
 	public int getWorkload() {
 		return workload;
+	}
+	
+	public int getMaxLoad() {
+		int total = 0;
+		for (int i = 0; i < taskList.size(); i++) {
+			Task t = taskList.get(i);
+			total += (t.getLoadperSec() + t.getDeviation());
+		}
+		return total;
 	}
 
 }
