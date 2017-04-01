@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class Processor implements Runnable {
+public class Processor {
 
 	private int numOfCores, capacity;
 	private boolean run;
@@ -17,32 +17,34 @@ public class Processor implements Runnable {
 		this.setNumOfCores(cores); 
 		this.setCapacity(cap);
 		for(int i = 0; i < this.numOfCores; i++) {
-			coreList.add(i, new Core(i, capacity));
+			Core temp = new Core(i, capacity);
+			coreList.add(i,temp);
+			new Thread(new Core(i, capacity)).start();
 		}
 	}
 
-	@Override
-	public void run() {
-		run = true;
-		while(run) {
-			if(taskQueue.isEmpty()) {
-				try {
-					Thread.sleep(1000);
-				} catch(InterruptedException ex) {
-				    Thread.currentThread().interrupt();
-				}
-			} else {
-				Core min = coreList.get(coreList.indexOf(Collections.min(coreList)));
-				if (min.getCapacity()-min.getWorkload() > taskQueue.peek().getLoadperSec()) {
-					min.addTask(taskQueue.poll());
-				}
-			}
-		}
-	}
+//	@Override
+//	public void run() {
+//		run = true;
+//		while(run) {
+//			if(taskQueue.isEmpty()) {
+//				try {
+//					Thread.sleep(1000);
+//				} catch(InterruptedException ex) {
+//				    Thread.currentThread().interrupt();
+//				}
+//			} else {
+//				Core min = coreList.get(coreList.indexOf(Collections.min(coreList)));
+//				if (min.getCapacity()-min.getWorkload() > taskQueue.peek().getLoadperSec()) {
+//					min.addTask(taskQueue.poll());
+//				}
+//			}
+//		}
+//	}
 	
-	public void addTask(Task t) {
-		this.taskQueue.add(t);
-	}
+//	public void addTask(Task t) {
+//		this.taskQueue.add(t);
+//	}
 
 	public int getNumOfCores() {
 		return numOfCores;
