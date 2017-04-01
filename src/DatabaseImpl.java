@@ -6,7 +6,7 @@ class DatabaseImpl extends UnicastRemoteObject implements DatabaseRemote{
 	
 	ArrayList<ConnectionObject> list;
 	
-	DatabaseImpl() throws RemoteException{
+	public DatabaseImpl() throws RemoteException{
 		super();
 		this.list = new ArrayList<ConnectionObject>();
 		ConnectionObject henkie = new ConnectionObject("127.0.0.1", 42);
