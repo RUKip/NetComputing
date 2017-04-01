@@ -5,12 +5,12 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class InputHandler implements Runnable {
-	private Server server;
+	private SocketServer server;
 	private Socket socket;
 	
 	
 	//handles the input for one connection between client and server, server uses inputHandlers for one to many connection
-	public InputHandler(Server server, Socket socket) {
+	public InputHandler(SocketServer server, Socket socket) {
 		this.server = server;
 		this.socket = socket;
 		System.out.println("completed making inputhandler");

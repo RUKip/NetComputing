@@ -10,7 +10,7 @@ import java.net.Socket;
 
 
 //TODO: implement good correct logging and error handling
-public class Server implements Runnable {
+public class SocketServer implements Runnable {
 	
 	private ServerSocket serverSocket;
 
@@ -21,7 +21,7 @@ public class Server implements Runnable {
 	
 //	Logger logger = LoggerFactory.getLogger(Server.class);
 	
-	public Server() {
+	public SocketServer() {
 		try {
 				System.out.println("made server object");
 				serverSocket = new ServerSocket(8850); //TODO: why 8850???

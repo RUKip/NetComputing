@@ -1,4 +1,4 @@
-package Interface;
+
 
 public class MenuModel {
 	private String address;
