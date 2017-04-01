@@ -7,7 +7,7 @@ public class MyServer{
 
 		try{  
 			Adder stub=new AdderRemote();  
-			Naming.rebind("rmi://localhost:5000/wonderland",stub);  
+			Naming.rebind("rmi://0.0.0.0:5000/wonderland",stub);  
 		}catch(Exception e){System.out.println(e);}  
 	}  
 }  

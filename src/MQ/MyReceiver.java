@@ -12,6 +12,9 @@ public class MyReceiver {
     ConnectionFactory factory = new ConnectionFactory();
     factory.setHost("localhost");
 
+
+	  Connection connection = factory.newConnection();
+	  Channel channel = connection.createChannel();
     channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
     System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 

@@ -39,7 +39,7 @@ public class MenuController {
 			case 2:
 				button.addActionListener(new ActionListener() {  
 			        public void actionPerformed(ActionEvent e) {
-		        		new DBMenu();
+		        		//new DBMenu();
 		    	    	view.removePanel();
 			        }
 				});
