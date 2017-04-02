@@ -117,9 +117,7 @@ public class Client implements Runnable {
 	
 	
 	private List<ConnectionObject> updateList(){
-		List<ConnectionObject> list = new ArrayList<ConnectionObject>();
-		System.out.println("updating list");
-		
+		List<ConnectionObject> list = new ArrayList<ConnectionObject>();		
 		try{  
 			String databaseAddress = "rmi://192.168.0.9:8851/wonderland"; //HARDCODED RMI SERVER
 			int port = 8851; //PORT RMI SERVER
@@ -153,7 +151,7 @@ public class Client implements Runnable {
 				stub.addComputer(socketServeraddress, portAddedComputer);
 			}
 				list = stub.getConnections();
-				System.out.println(stub.getConnections().size()); 
+				System.out.println("Nr of servers connected: " + stub.getConnections().size()); 
 			}catch(Exception e){		        	
 				System.out.println(e.getMessage());
 				System.out.println("Something went wong");
@@ -172,7 +170,7 @@ public class Client implements Runnable {
 					if(!server.getIp().equals(socketServeraddress)){
 						message = new Message(Message.CHECK_TYPE, Message.CHECK_MESSAGE);
 						boolean serverStarted = connectToServer(server); //response of connected server, true if server was idle and started 
-						System.out.println("client connected to server");
+						System.out.println("Client connected to server: " + server.getIp());
 						if(serverStarted){
 							tooMuchEnergy = false;
 							break;
