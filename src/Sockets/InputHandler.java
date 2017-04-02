@@ -13,17 +13,17 @@ public class InputHandler implements Runnable {
 	public InputHandler(SocketServer server, Socket socket) {
 		this.server = server;
 		this.socket = socket;
-		System.out.println("completed making inputhandler");
+//		System.out.println("completed making inputhandler");
 	}
 
 	
 	protected Message receiveMessage() {
 		Message message = null;
-		System.out.println("receiving message");
+		
 		try {
 			ObjectInputStream inStream = new ObjectInputStream(socket.getInputStream());
 			message = (Message) inStream.readObject();
-	
+			System.out.println("Server is receiving the message: "+ message.getData());
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -35,7 +35,7 @@ public class InputHandler implements Runnable {
 	
 	
 	private void sendMessage(Message m){
-		System.out.println("sending a message back to client");
+		System.out.println("Server is sending a message back to client: " + m.getData());
 	    try {
 			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 		    out.flush();
@@ -50,12 +50,12 @@ public class InputHandler implements Runnable {
 		if(server.isBusy()){
 			//return to client message that server is already busy and it should keep searching
 			sendMessage(new Message(Message.RESPONSE_TYPE, Message.BUSY_MESSAGE));
-			System.out.println("I am Busy so don't accept requests");
+			System.out.println("The server is busy; it cannot accept requests ");
 		}else{
 			server.setBusy(true);
 			//TODO: return to client message that server is started and that it should stop searching
 			sendMessage(new Message(Message.RESPONSE_TYPE, Message.AVAILABLE_MESSAGE));
-			System.out.println("I am available so starting now");
+			System.out.println("The server is available; it will accept a connection and start working ");
 		}
 	}
 	
@@ -70,7 +70,7 @@ public class InputHandler implements Runnable {
 					
 				try {
 					socket.close();
-					System.out.println("Socket was closed");
+//					System.out.println("Socket was closed");
 				} catch (IOException e) {
 					System.out.println("Goes wrong here");
 					// TODO Auto-generated catch block
