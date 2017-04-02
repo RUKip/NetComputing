@@ -13,7 +13,6 @@ public class InputHandler implements Runnable {
 	public InputHandler(SocketServer server, Socket socket) {
 		this.server = server;
 		this.socket = socket;
-//		System.out.println("completed making inputhandler");
 	}
 
 	
