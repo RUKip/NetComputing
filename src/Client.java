@@ -131,12 +131,11 @@ public class Client implements Runnable {
 				//BELOW IS FOR SOCKET CONNECTION
 //				String addressAddedComputer;
 				
-				try { // special exception handler for registry creation
+				try { 
 		            LocateRegistry.createRegistry(port);
-		            System.out.println("java RMI registry created.");
+		            System.out.println("java RMI registry created at port: ." + port);
 		        } catch (RemoteException e) {
-		            // do nothing, error means registry already exists
-		            System.out.println("java RMI registry already exists.");
+		            System.out.println("RMI registry already exists");
 		        }
 				
 				System.out.println("pls give your ip address:");
