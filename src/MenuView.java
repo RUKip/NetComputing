@@ -113,7 +113,7 @@ public class MenuView extends JFrame {
         });
 
         serverAddressLabel.setForeground(new Color(28,28,28));
-        serverAddressLabel.setBounds((int)width/2-200, 700, 200, 30);
+        serverAddressLabel.setBounds((int)width/2-300, 670, 200, 30);
         serverAddressLabel.setBackground(Color.white);
 
         serverAddressField.setForeground(Color.gray);
