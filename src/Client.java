@@ -2,10 +2,8 @@
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.rmi.Naming;
-import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
@@ -13,14 +11,15 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-import Sockets.Message;
-import Sockets.SocketServer;
-
+//import org.slf4j.Logger;
 
 //TODO: change names of client server to sender receiver
 
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
+
+import Sockets.Message;
+import Sockets.SocketServer;
 
 public class Client implements Runnable {
 
@@ -72,7 +71,6 @@ public class Client implements Runnable {
 //			System.out.println("I made ojbect input stream");
 
 			
-			//TODO: check if this works on two computers
 			Message response;
 
             try {
@@ -97,7 +95,8 @@ public class Client implements Runnable {
 			socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println(" oh noes connection to server failed, possibly server is offline or entry is wrong");
+			System.out.println(" oh noes connection to server failed, "
+					+ "possibly server is offline or entry is wrong");
 		}
 		
 
@@ -111,25 +110,19 @@ public class Client implements Runnable {
 		int randomNr = ThreadLocalRandom.current().nextInt(0, 100+1);
 		tooMuchEnergy = (randomNr>90);
 		tooLowEnergy = (randomNr<10);
-		System.out.println("Random Nr: " + randomNr);
+//		System.out.println("Random Nr: " + randomNr);
 	}
 	
 	
 	private List<ConnectionObject> updateList(){
 		List<ConnectionObject> list = new ArrayList<ConnectionObject>();
 		System.out.println("updating list");
+		
 		try{  
 			String databaseAddress = "rmi://192.168.0.9:8851/wonderland"; //HARDCODED RMI SERVER
 			int port = 8851; //PORT RMI SERVER
 			
 
-	        try { // special exception handler for registry creation
-	            LocateRegistry.createRegistry(port);
-	            System.out.println("java RMI registry created.");
-	        } catch (RemoteException e) {
-	            // do nothing, error means registry already exists
-	            System.out.println("java RMI registry already exists.");
-	        }
 	        
 			DatabaseRemote stub=(DatabaseRemote)
 					Naming.lookup(databaseAddress);
@@ -137,6 +130,15 @@ public class Client implements Runnable {
 			if(initialStartup){
 				//BELOW IS FOR SOCKET CONNECTION
 //				String addressAddedComputer;
+				
+				try { // special exception handler for registry creation
+		            LocateRegistry.createRegistry(port);
+		            System.out.println("java RMI registry created.");
+		        } catch (RemoteException e) {
+		            // do nothing, error means registry already exists
+		            System.out.println("java RMI registry already exists.");
+		        }
+				
 				System.out.println("pls give your ip address:");
 				Scanner s = new Scanner(System.in);
 				String address = s.nextLine();
