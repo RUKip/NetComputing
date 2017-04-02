@@ -168,6 +168,8 @@ public class Client implements Runnable {
 			if(tooMuchEnergy){
 				for(ConnectionObject server : servers){
 					if(!server.getIp().equals("/"+socketServeraddress)){
+						System.out.println("IP: " + server.getIp());
+						System.out.println("Connected to: " +"/" + socketServeraddress);
 						message = new Message(Message.CHECK_TYPE, Message.CHECK_MESSAGE);
 						boolean serverStarted = connectToServer(server); //response of connected server, true if server was idle and started 
 						System.out.println("Client connected to server: " + server.getIp());
