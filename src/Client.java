@@ -31,6 +31,8 @@ public class Client implements Runnable {
 	
 	protected Socket socket;
 	
+	String socketServeraddress;
+	
 	private SocketServer s;
 	
 	protected int lastPackageId;
@@ -140,15 +142,15 @@ public class Client implements Runnable {
 				
 				System.out.println("pls give your ip address:");
 				Scanner s = new Scanner(System.in);
-				String address = s.nextLine();
+				socketServeraddress = s.nextLine();
 				s.close();
-				System.out.println("Read: " + address);
+				System.out.println("Read: " + socketServeraddress);
 				
 				int portAddedComputer = 8850;
 				
 				initialStartup = false;
 				System.out.println("added this computer to the RMI server");
-				stub.addComputer(address, portAddedComputer);
+				stub.addComputer(socketServeraddress, portAddedComputer);
 			}
 				list = stub.getConnections();
 				System.out.println(stub.getConnections().size()); 
@@ -167,12 +169,14 @@ public class Client implements Runnable {
 			checkEnergyLvl();
 			if(tooMuchEnergy){
 				for(ConnectionObject server : servers){
-					message = new Message(Message.CHECK_TYPE, Message.CHECK_MESSAGE);
-					boolean serverStarted = connectToServer(server); //response of connected server, true if server was idle and started 
-					System.out.println("client connected to server");
-					if(serverStarted){
-						tooMuchEnergy = false;
-						break;
+					if(!server.getIp().equals(socketServeraddress)){
+						message = new Message(Message.CHECK_TYPE, Message.CHECK_MESSAGE);
+						boolean serverStarted = connectToServer(server); //response of connected server, true if server was idle and started 
+						System.out.println("client connected to server");
+						if(serverStarted){
+							tooMuchEnergy = false;
+							break;
+						}
 					}
 				}
 			}else if(tooLowEnergy){
