@@ -28,7 +28,7 @@ public class MyReceiver {
 
 	//for testing purposes
 	public static void main(String[] argv) throws Exception {
-		new Processor(1,12);
+		new Processor(1,14);
 	}
 
   private static void init() throws Exception {
@@ -47,26 +47,20 @@ public class MyReceiver {
 			  String message = new String(body, "UTF-8");
 			  long tag = envelope.getDeliveryTag();
 		      System.out.println(" [x] Received '" + message + "'");
-		      boolean refused = true;
 			  try {
 				  Task t = new Task(message);
 				  if (t.getLoadperSec() + t.getDeviation() > core.getCapacity() - core.getMaxLoad()) {
-					  refused = true;
+					  System.out.println("Refused");
+					  channel.basicNack(envelope.getDeliveryTag(), false, true);
 				  } else {
-					  refused = false;
 					  core.addTask(t);
+					  channel.basicAck(tag, false);
 				  }
 			  } finally {
-				  if (refused) {
-					  channel.basicNack(envelope.getDeliveryTag(), false, true);
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-				  } else {
-					  System.out.println(" [x] Done");
-					  channel.basicAck(tag, false);
+				  try {
+					  Thread.sleep(1000);
+				  } catch (InterruptedException e) {
+					  e.printStackTrace();
 				  }
 			  }
 		  }
