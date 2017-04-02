@@ -20,6 +20,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import Sockets.Message;
 import Sockets.SocketServer;
+import Workload.Processor;
 
 public class Client implements Runnable {
 
@@ -31,9 +32,11 @@ public class Client implements Runnable {
 	
 	protected Socket socket;
 	
-	String socketServeraddress;
+	private String socketServeraddress;
 	
 	private SocketServer s;
+	
+	private Processor p;
 	
 	protected int lastPackageId;
 	
@@ -49,7 +52,7 @@ public class Client implements Runnable {
 		servers = new ArrayList<>();
 		this.s = s;
 		new Thread(s).start();
-		System.out.println("I get here");
+		p = new Processor(2, 10); //can be scaled up or down for own testing purposes.
 	}
 	
 	protected boolean connectToServer(ConnectionObject connection) { //connects to server and tries turning it on, returns true if succeeded
@@ -110,6 +113,7 @@ public class Client implements Runnable {
 	//TODO: implement (now its randomly simulated too much energy)
 	private void checkEnergyLvl(){  //Energy usage check, set tooMuchEnergy true if threshold reached
 		int randomNr = ThreadLocalRandom.current().nextInt(0, 100+1);
+		//p.getWorkload
 		tooMuchEnergy = (randomNr>90);
 		tooLowEnergy = (randomNr<10);
 //		System.out.println("Random Nr: " + randomNr);
