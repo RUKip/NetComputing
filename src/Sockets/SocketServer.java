@@ -38,8 +38,11 @@ public class SocketServer implements Runnable {
 	//TODO: this is a simulation, in the actual implementation for this program you should idle/unidle the server he
 	public synchronized void setBusy(boolean value){
 		serverBusy = value;
+		System.out.println("Server set to busy: " + value);
 		if(value){
-			//activate server here
+			//activate server here, put to rest service here
+		}else{
+			//idle server here, delete from rest service here
 		}
 	}
 	
@@ -55,7 +58,7 @@ public class SocketServer implements Runnable {
 				socket = serverSocket.accept();
 				System.out.println("server accepted a client");
 				InputHandler handler = new InputHandler(this,socket);
-				handler.run();
+				new Thread(handler).start();
 //				System.out.println("Goes wrong?");
 
 			} catch (IOException e1) {

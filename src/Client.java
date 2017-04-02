@@ -47,7 +47,8 @@ public class Client implements Runnable {
 	public Client(SocketServer s) {
 		servers = new ArrayList<>();
 		this.s = s;
-		s.run();
+		new Thread(s).start();
+		System.out.println("I get here");
 	}
 	
 	protected boolean connectToServer(ConnectionObject connection) { //connects to server and tries turning it on, returns true if succeeded
@@ -118,7 +119,7 @@ public class Client implements Runnable {
 		List<ConnectionObject> list = new ArrayList<ConnectionObject>();
 		System.out.println("updating list");
 		try{  
-			String databaseAddress = "rmi://localhost:8851/wonderland";//"rmi://192.168.0.9:8851/wonderland"; //HARDCODED RMI SERVER
+			String databaseAddress = "rmi://192.168.0.9:8851/wonderland"; //HARDCODED RMI SERVER
 			int port = 8851; //PORT RMI SERVER
 			
 
@@ -163,9 +164,7 @@ public class Client implements Runnable {
 		while(true){
 			servers = updateList();
 			checkEnergyLvl();
-//			System.out.println(" checked for too much energy" );
 			if(tooMuchEnergy){
-//				System.out.println(" too much energy" );
 				for(ConnectionObject server : servers){
 					message = new Message(Message.CHECK_TYPE, Message.CHECK_MESSAGE);
 					boolean serverStarted = connectToServer(server); //response of connected server, true if server was idle and started 
