@@ -120,8 +120,9 @@ public class Client implements Runnable {
 	private List<ConnectionObject> updateList(){
 		List<ConnectionObject> list = new ArrayList<ConnectionObject>();		
 		try{  
-			String databaseAddress = "rmi://145.97.175.140:8851/wonderland"; //HARDCODED RMI SERVER
+			String hostName = "localhost";
 			int port = 8851; //PORT RMI SERVER
+			String databaseAddress = "rmi://"+hostName+":"+port+"/wonderland"; //HARDCODED RMI SERVER
 			
 
 	        

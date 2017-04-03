@@ -19,11 +19,9 @@ public class Server{
 	        System.out.println("java RMI registry already exists.");
 	    }	
 
-	    String hostname = "145.97.175.140"; //HARDCODED TO RMI SERVER
+	    String hostName = "localhost"; //HARDCODED TO RMI SERVER
 
-	    String bindLocation = "//" + hostname + ":" + port + "/wonderland";
-
-		// Naming.rebind("rmi://192.168.0.10:8851/wonderland", databaseImplementation);
+	    String bindLocation = "//" + hostName + ":" + port + "/wonderland";
 
 		try {
 	            Naming.bind(bindLocation, databaseImplementation);
