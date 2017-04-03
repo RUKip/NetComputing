@@ -51,7 +51,7 @@ public class Client implements Runnable {
 		servers = new ArrayList<>();
 		this.s = s;
 		new Thread(s).start();
-		p = new Processor(2, 10); //can be scaled up or down for own testing purposes.
+		p = new Processor(1, 15); //can be scaled up or down for own testing purposes.
 	}
 	
 	protected boolean connectToServer(ConnectionObject connection) { //connects to server and tries turning it on, returns true if succeeded
@@ -120,7 +120,7 @@ public class Client implements Runnable {
 	private List<ConnectionObject> updateList(){
 		List<ConnectionObject> list = new ArrayList<ConnectionObject>();		
 		try{  
-			String databaseAddress = "rmi://145.90.135.225:8851/wonderland"; //HARDCODED RMI SERVER
+			String databaseAddress = "rmi://145.97.146.12:8851/wonderland"; //HARDCODED RMI SERVER
 			int port = 8851; //PORT RMI SERVER
 			
 

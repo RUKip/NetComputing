@@ -37,9 +37,12 @@ public class MySender implements Runnable {
 
 	    q = new LinkedList<Task>();
 	    //for testing purposes
-	    q.add(new Task(5,6,5));
-	    q.add(new Task(5,6,4));
-	    q.add(new Task(5,6,3));
+	    q.add(new Task(5,2,5));
+	    q.add(new Task(3,1,4));
+	    q.add(new Task(5,0,3));
+	    q.add(new Task(4,0,4));
+	    q.add(new Task(3,0,7));
+	    q.add(new Task(5,0,9));
 	    
 	    run = true;
 	    while(run) { 
