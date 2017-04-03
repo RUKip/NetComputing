@@ -26,6 +26,7 @@ public class MenuView extends JFrame {
     private MenuModel model;
     private MenuController controller;
     private JPanel panel;
+    private Thread t;
     private Font myFont = new Font("Helvetica", Font.BOLD, 25);
     public MenuView(MenuModel model) {
         this.model = model;
@@ -62,7 +63,7 @@ public class MenuView extends JFrame {
         text.setBounds((int)width/4- 30,(int) 250+200,300,30);
         panel.add(text);
 
-        JButton button1 = new JButton("Start a server");
+        JButton button1 = new JButton("Start a RMI database server");
         button1.setFont(myFont);
         button1.setForeground(new Color(27,159,198));
         button1.setBounds((int)width/4-200, 250 + 60, 600,50);
@@ -92,13 +93,28 @@ public class MenuView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	SocketServer s = new SocketServer();
-				new Client(s).run();
+            	System.out.println("started socketServer");;
+				t = new Thread(new Client(s));
+				t.start();
 				text.setText("Created a new client!");
 				System.out.println("Started a client... " );
 
             }
         });
-         
+      
+        JButton button3 = new JButton("Close everything properly");
+        button3.setFont(myFont);
+        button3.setForeground(new Color(27,159,198));
+        button3.setBounds((int)width/2-300, 750 + 120, 600,50);
+        button3.setBackground(Color.white);
+        panel.add(button3);
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	removePanel();
+            }
+        });
+      
         //show local IP/port
         JLabel  localIPLabel = new JLabel();
 
@@ -146,7 +162,9 @@ public class MenuView extends JFrame {
         }
 
     public void removePanel() {
-        panel.setVisible(false);
+    	panel.setVisible(false);
+    	if(t != null)	this.t.interrupt();
+    	//if(t != null)	this.t.stop();
         dispose();
     }
 
