@@ -6,9 +6,10 @@ import java.util.Random;
 
 import MQ.MyReceiver;
 
-public class Core implements Runnable, Comparable<Core> {
+public class Core implements Runnable {
 	
-	private int number, capacity, workload;
+	private int number, capacity;
+	public int workload;
 	private static boolean run;
 	private List<Task> taskList = new ArrayList<Task>();
 	private Random r = new Random();
@@ -24,7 +25,7 @@ public class Core implements Runnable, Comparable<Core> {
 	public void run() {
 		run = true;
 
-		System.out.println("core running");
+		//System.out.println("core running");
 		try {
 			this.receiver = new MyReceiver(this);
 		} catch (Exception e) {
@@ -32,8 +33,8 @@ public class Core implements Runnable, Comparable<Core> {
 		}
 		while(run) {
 			updateWorkload();
-			if (this.workload != 0)
-				System.out.println("Workload: " + this.workload);
+//			if (this.workload != 0)
+//				System.out.println("Workload: " + this.workload);
 			updateTasks();
 			try {
 			    Thread.sleep(1000);                 
@@ -51,7 +52,7 @@ public class Core implements Runnable, Comparable<Core> {
 				t.decrementDuration();
 			else {
 				taskList.remove(i);
-				System.out.println("completed task!");
+				//System.out.println("completed task!");
 			}
 			
 		}
@@ -70,18 +71,10 @@ public class Core implements Runnable, Comparable<Core> {
 	}
 	
 	public List<Task> abortAndSend() {
-		this.run = false;
+		Core.run = false;
 		return this.taskList;
 	}
 
-	//TODO: switch to available resources
-	@Override
-	public int compareTo(Core c) {
-		if(c != null && c instanceof Core) 
-			return (this.capacity - this.workload) - (c.getCapacity() - c.getWorkload());
-		return 0;
-	}
-	
 	public void addTask(Task t) {
 		this.taskList.add(t);
 	}
@@ -95,7 +88,7 @@ public class Core implements Runnable, Comparable<Core> {
 	}
 
 	public int getWorkload() {
-		return workload;
+		return this.workload;
 	}
 	
 	public int getMaxLoad() {

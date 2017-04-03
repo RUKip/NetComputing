@@ -12,12 +12,13 @@ public class Processor {
 	private MySender MQ;
 	
 	public Processor (int cores, int cap) {
+		if (cap < 20) cap = 20;
 		this.setNumOfCores(cores); 
 		this.setCapacity(cap);
 		for(int i = 0; i < this.numOfCores; i++) {
 			Core temp = new Core(i, capacity);
 			coreList.add(i,temp);
-			new Thread(new Core(i, capacity)).start();
+			new Thread(temp).start();
 		}
 		MQ = new MySender();
 		new Thread(MQ).start();
@@ -48,13 +49,13 @@ public class Processor {
 		for(Core core : this.coreList){
 			totalLoad += core.getWorkload();
 		}
+		//System.out.println("load = " + totalLoad + " div = " + this.numOfCores*this.capacity);
 		return (100*totalLoad)/(this.numOfCores*this.capacity);
 	}
 	
 	public void stop() {
-		for(int i = 0; i < this.numOfCores; i++) {
-			Core c = new Core(i, capacity);
-			MQ.addTask(c.abortAndSend());
+		for(Core core : this.coreList){
+			MQ.addTask(core.abortAndSend());
 		}
 		MQ.stop();
 		
