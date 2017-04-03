@@ -3,6 +3,7 @@ package Sockets;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.UUID;
 
 //
 //import org.slf4j.Logger;
@@ -34,15 +35,26 @@ public class SocketServer implements Runnable {
 	public boolean isBusy(){
 		return serverBusy;
 	}
-	
+	String address = "";
+	public void sendAddress(String address){
+		this.address = address;
+	}
+	UUID id;
 	//TODO: this is a simulation, in the actual implementation for this program you should idle/unidle the server he
 	public synchronized void setBusy(boolean value){
 		serverBusy = value;
 		System.out.println("Server set to busy: " + value);
+		RestClient t = new RestClient();
+		id = UUID.randomUUID();
 		if(value){
-			//activate server here, put to rest service here
+			if(!this.address.equals("")) {
+				t.update(address,id);
+			}
+			System.out.println("Stuff is uploaded... ");
 		}else{
-			//idle server here, delete from rest service here
+			if(!this.address.equals("")) {
+				t.delete(id.toString());
+			}
 		}
 	}
 	
