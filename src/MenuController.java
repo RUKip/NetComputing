@@ -1,15 +1,18 @@
 
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 import Sockets.SocketServer;
 
 
 
-public class MenuController {
+public class MenuController<Jpanel> {
 	
 	private MenuView view;
 	private MenuModel model;
@@ -23,12 +26,22 @@ public class MenuController {
 	public void addActionListener(JButton button, int idx) {
 		switch (idx) {
 			case 0:
+			try {
 				button.addActionListener(new ActionListener() {  
 			        public void actionPerformed(ActionEvent e) {
-			        	//new Server()
+			        	try {
+							new Server();						
+													
+						} catch (RemoteException e1) {
+							e1.printStackTrace();
+						}
 			        	//view.removePanel();
 			        }
 				});
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 				break;
 			case 1:
 				button.addActionListener(new ActionListener() {  
@@ -38,6 +51,7 @@ public class MenuController {
 			        	new Client(s).run();
 		        		System.out.println(" started a client " );
 		    	    	//view.removePanel();
+		        		
 			        }
 				});
 			case 2:

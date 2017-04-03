@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -16,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Sockets.SocketServer;
+
 /** we need to refactor this **/
 
 public class MenuView extends JFrame {
@@ -23,7 +26,7 @@ public class MenuView extends JFrame {
     private MenuModel model;
     private MenuController controller;
     private JPanel panel;
-
+    private Font myFont = new Font("Helvetica", Font.BOLD, 25);
     public MenuView(MenuModel model) {
         this.model = model;
         this.controller = new MenuController(this, model);
@@ -43,12 +46,7 @@ public class MenuView extends JFrame {
 		double height = screenSize.getHeight();
 //		this.setBounds((int) width / 2 - 300, (int) height / 2 - 300, 600, 600);
 		this.setBounds(0,0, (int)width,(int) height-50);
-		
-		
-		
-		
-        //set up 'Asteroids' label
-		
+				
         JLabel title = new JLabel("Activity Monitor");
         Font myfont = new Font("Helvetica", Font.PLAIN, 90);  
 
@@ -56,24 +54,74 @@ public class MenuView extends JFrame {
         title.setForeground(new Color(15 , 59 , 104));
         title.setBounds((int) width/2 - 300,30,900,200);
         panel.add(title);
+        
 
-        //set up the buttons
-        ArrayList<JButton> buttons = new ArrayList<>(); 
-        buttons.add(new JButton("Run locally"));
-        buttons.add(new JButton("Connect to a network"));
-        buttons.add(new JButton("Connect to the database"));
-//        buttons.add(new JButton("Lay down and cry"));
-//        buttons.add(new JButton("Join multiplayer game"));
 
-        for (int i = 0; i < buttons.size(); i++) {
-            JButton button = buttons.get(i);
-            panel.add(button);
-            button.setFont(new Font("Helvetica", Font.BOLD, 25));
-            button.setForeground(new Color(27,159,198));
-            button.setBounds((int)width/2-300, 250 + i * 60, 600,50);
-            button.setBackground(Color.white);
-            controller.addActionListener(button, i);
-        }
+
+//        //set up the buttons
+//        ArrayList<JButton> buttons = new ArrayList<>(); 
+////        buttons.add(new JButton("Run locally"));
+//        buttons.add(new JButton("Start a server"));
+//        buttons.add(new JButton("Start a client"));
+////        buttons.add(new JButton("Lay down and cry"));
+////        buttons.add(new JButton("Join multiplayer game"));
+//
+//        for (int i = 0; i < buttons.size(); i++) {
+//            JButton button = buttons.get(i);
+//            panel.add(button);
+//            button.setFont(new Font("Helvetica", Font.BOLD, 25));
+//            button.setForeground(new Color(27,159,198));
+//            button.setBounds((int)width/2-300, 250 + i * 60, 600,50);
+//            button.setBackground(Color.white);
+//            controller.addActionListener(button, i);
+//        }
+        
+        
+        JLabel text = new JLabel();
+        text.setFont(myFont);
+        text.setForeground(new Color(28,28,28));
+        text.setBounds((int)width/2 - 150,800,300,30);
+        panel.add(text);
+
+        JButton button1 = new JButton("Start a server");
+        button1.setFont(myFont);
+        button1.setForeground(new Color(27,159,198));
+        button1.setBounds((int)width/2-300, 250 + 60, 600,50);
+        button1.setBackground(Color.white);
+        panel.add(button1);
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	try {
+					new Server();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				text.setText("Created a new server!");
+
+            }
+        });
+        
+        
+        JButton button2 = new JButton("Start a client");
+        button2.setFont(myFont);
+        button2.setForeground(new Color(27,159,198));
+        button2.setBounds((int)width/2-300, 250 + 120, 600,50);
+        button2.setBackground(Color.white);
+        panel.add(button2);
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	SocketServer s = new SocketServer();
+				new Client(s).run();
+				text.setText("Created a new client!");
+				System.out.println(" started a client " );
+
+            }
+        });
+        
+        
         
         //TODO Add project description button
 //        JButton projectDescription = new JButton("Project description");
@@ -84,6 +132,10 @@ public class MenuView extends JFrame {
 //        controller.addActionListener(highscores, 4);
         
 
+        
+ 
+      
+        
         //show local IP/port
         JLabel  localIPLabel = new JLabel();
         JLabel  localPortLabel = new JLabel();
