@@ -120,7 +120,7 @@ public class Client implements Runnable {
 	private List<ConnectionObject> updateList(){
 		List<ConnectionObject> list = new ArrayList<ConnectionObject>();		
 		try{  
-			String databaseAddress = "rmi://145.97.175.140:8851/wonderland"; //HARDCODED RMI SERVER
+			String databaseAddress = "rmi://192.168.178.13:8851/wonderland"; //HARDCODED RMI SERVER
 			int port = 8851; //PORT RMI SERVER
 			
 
@@ -161,7 +161,7 @@ public class Client implements Runnable {
 
 	@Override
 	public void run() {
-		while(true){
+		 while (!Thread.currentThread().isInterrupted()) {
 			servers = updateList();
 			checkEnergyLvl();
 			if(tooMuchEnergy){
@@ -185,8 +185,11 @@ public class Client implements Runnable {
 				Thread.sleep(WAIT_TIME);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+				break;
 			}
 		}
+		 p.stop();
+		 System.out.println("Peace out");
 	}
 	
 	public static void main(String[] argv){

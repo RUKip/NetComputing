@@ -42,7 +42,7 @@ public class Core implements Runnable {
 			    Thread.currentThread().interrupt();
 			}
 		}
-		receiver.stop();
+		if(receiver != null) receiver.stop();
 	}
 
 	private void updateTasks() {

@@ -19,7 +19,7 @@ public class Server{
 	        System.out.println("java RMI registry already exists.");
 	    }	
 
-	    String hostname = "145.97.175.140"; //HARDCODED TO RMI SERVER
+	    String hostname = "192.168.178.13"; //HARDCODED TO RMI SERVER
 
 	    String bindLocation = "//" + hostname + ":" + port + "/wonderland";
 
@@ -38,10 +38,6 @@ public class Server{
 	            System.out.println(" Server failed: \n" + e);
 	            e.printStackTrace();
 	        }	
-	}
-	
-	public static void main(String [] args) throws RemoteException{
-		new Server();
 	}
 			
 }
