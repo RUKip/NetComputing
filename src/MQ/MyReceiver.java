@@ -41,7 +41,7 @@ private static Processor processor;
 	  LOGGER.addHandler(handler);
 	  
 	  ConnectionFactory factory = new ConnectionFactory();
-	  factory.setHost("localhost");
+	  factory.setHost("127.0.0.1");
 	  Connection connection = factory.newConnection();
 	  channel = connection.createChannel();
       channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
