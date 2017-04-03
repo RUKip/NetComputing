@@ -14,6 +14,7 @@ import java.util.logging.*;
  * Install RabbitMQServer (which requires Erlang)
  */
 
+//class was based on the tutorial for Message Queues for RabbitMQ
 public class MyReceiver {
 
   private static final String TASK_QUEUE_NAME = "task_queue";

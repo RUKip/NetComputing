@@ -51,7 +51,7 @@ public class Client implements Runnable {
 		servers = new ArrayList<>();
 		this.s = s;
 		new Thread(s).start();
-		p = new Processor(1, 15); //can be scaled up or down for own testing purposes.
+		p = new Processor(2, 17); //can be scaled up or down for own testing purposes.
 	}
 	
 	protected boolean connectToServer(ConnectionObject connection) { //connects to server and tries turning it on, returns true if succeeded
