@@ -7,6 +7,12 @@ import Workload.Task;
 
 import java.io.IOException;
 
+/*
+ * To be able to run this:
+ * include the jar files in NetComputing/caches
+ * Install RabbitMQServer (which requires Erlang)
+ */
+
 public class MyReceiver {
 
   private static final String TASK_QUEUE_NAME = "task_queue";
@@ -20,11 +26,9 @@ public class MyReceiver {
 	    channel.basicConsume(TASK_QUEUE_NAME, false, consumer);
 	}
 
+	//for testing purposes
 	public static void main(String[] argv) throws Exception {
-//		core = null;
-//	    init();
-//	    channel.basicConsume(TASK_QUEUE_NAME, false, consumer);
-		Processor p = new Processor(2,10);
+		new Processor(1,14);
 	}
 
   private static void init() throws Exception {
@@ -41,29 +45,22 @@ public class MyReceiver {
 		  @Override
 		  public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
 			  String message = new String(body, "UTF-8");
-		
+			  long tag = envelope.getDeliveryTag();
 		      System.out.println(" [x] Received '" + message + "'");
-			  boolean refused = false;
 			  try {
 				  Task t = new Task(message);
-				  if (t.getLoadperSec() > core.getCapacity() - core.getWorkload()) {
-					  System.out.println(" [x] refused");
+				  if (t.getLoadperSec() + t.getDeviation() > core.getCapacity() - core.getMaxLoad()) {
+					  System.out.println("Refused");
 					  channel.basicNack(envelope.getDeliveryTag(), false, true);
-					  refused = true;
 				  } else {
-					  refused = false;
 					  core.addTask(t);
+					  channel.basicAck(tag, false);
 				  }
 			  } finally {
-				  if (refused)
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				  else {
-					  System.out.println(" [x] Done");
-					  channel.basicAck(envelope.getDeliveryTag(), false);
+				  try {
+					  Thread.sleep(1000);
+				  } catch (InterruptedException e) {
+					  e.printStackTrace();
 				  }
 			  }
 		  }
@@ -76,18 +73,6 @@ public class MyReceiver {
 	} catch (IOException e) {
 		e.printStackTrace();
 	}
-  }
-
-	private static void doWork(String task) {
-		for (char ch : task.toCharArray()) {
-			if (ch == '.') {
-			  try {
-				  Thread.sleep(1000);
-			  } catch (InterruptedException _ignored) {
-				  Thread.currentThread().interrupt();
-			  }
-	      }
-    }
   }
 }
 

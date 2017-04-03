@@ -9,7 +9,7 @@ import MQ.MyReceiver;
 public class Core implements Runnable, Comparable<Core> {
 	
 	private int number, capacity, workload;
-	private boolean run;
+	private static boolean run;
 	private List<Task> taskList = new ArrayList<Task>();
 	private Random r = new Random();
 	private MyReceiver receiver;
@@ -31,8 +31,10 @@ public class Core implements Runnable, Comparable<Core> {
 			e.printStackTrace();
 		}
 		while(run) {
-			updateTasks();
 			updateWorkload();
+			if (this.workload != 0)
+				System.out.println("Workload: " + this.workload);
+			updateTasks();
 			try {
 			    Thread.sleep(1000);                 
 			} catch(InterruptedException ex) {
@@ -44,7 +46,14 @@ public class Core implements Runnable, Comparable<Core> {
 
 	private void updateTasks() {
 		for (int i = 0; i < taskList.size(); i++) {
-			taskList.get(i).decrementDuration();
+			Task t = taskList.get(i);
+			if (t.getDuration() > 1)
+				t.decrementDuration();
+			else {
+				taskList.remove(i);
+				System.out.println("completed task!");
+			}
+			
 		}
 	}
 
@@ -52,7 +61,10 @@ public class Core implements Runnable, Comparable<Core> {
 		int tempLoad = 0;
 		for (int i = 0; i < taskList.size(); i++) {
 			Task t = taskList.get(i);
-			tempLoad = tempLoad + t.getLoadperSec() + t.getDeviation() * (r.nextInt(2) - 1); 
+			double rand = ((float) r.nextInt(200) / 100.0) - 1.0;
+			int dev = (int) (t.getDeviation() * rand);
+			dev = (dev > -t.getLoadperSec() ? dev : -t.getLoadperSec());
+			tempLoad = tempLoad + t.getLoadperSec() + dev; 
 		}
 		workload = tempLoad;
 	}
@@ -84,6 +96,15 @@ public class Core implements Runnable, Comparable<Core> {
 
 	public int getWorkload() {
 		return workload;
+	}
+	
+	public int getMaxLoad() {
+		int total = 0;
+		for (int i = 0; i < taskList.size(); i++) {
+			Task t = taskList.get(i);
+			total += (t.getLoadperSec() + t.getDeviation());
+		}
+		return total;
 	}
 
 }

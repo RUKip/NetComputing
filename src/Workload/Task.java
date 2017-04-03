@@ -6,7 +6,7 @@ import java.util.List;
 public class Task {
 
 	private int loadperSec, deviation, duration;
-
+	
 	public Task(int load, int dev, int dur) {
 		this.loadperSec = load;
 		this.deviation = dev;

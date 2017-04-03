@@ -1,6 +1,7 @@
 package MQ;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import com.rabbitmq.client.Channel;
@@ -10,55 +11,73 @@ import com.rabbitmq.client.MessageProperties;
 
 import Workload.Task;
 
-public class MySender {
+public class MySender implements Runnable {
 
   private static final String TASK_QUEUE_NAME = "task_queue";
   private static Queue<Task> q;
   private static boolean run;
 
   public static void main(String[] argv) throws Exception {
-    ConnectionFactory factory = new ConnectionFactory();
-    factory.setHost("localhost");
-    Connection connection = factory.newConnection();
-    Channel channel = connection.createChannel();
+	 MySender.body();
+  }
+  
+  @Override
+  public void run() {
+	  MySender.body();
+  }
+  
+  private static void body() {
+	  try {
+		ConnectionFactory factory = new ConnectionFactory();
+		factory.setHost("localhost");
+		Connection connection = factory.newConnection();
+	    Channel channel = connection.createChannel();
 
-    channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
+	    channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
 
-    q = new LinkedList<Task>();
-    q.add(new Task(4,6,2));
-    q.add(new Task(5,7,3));
-    q.add(new Task(6,8,4));
-    
-    run = true;
-    while(run) {
-    	Task t = q.poll();
-    	if(t == null) {
-    		Thread.sleep(500);
-    	} else {
-		    String message = t.toString();//getMessage(argv);
-		
-		    channel.basicPublish("", TASK_QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes("UTF-8"));
-		    System.out.println(" [x] Sent '" + message + "'");
-    	}
-    }
+	    q = new LinkedList<Task>();
+	    //for testing purposes
+	    q.add(new Task(5,6,5));
+	    q.add(new Task(5,6,4));
+	    q.add(new Task(5,6,3));
+	    
+	    run = true;
+	    while(run) { 
+	    	Task t = q.poll();
+	    	if(t == null) {
+	    		Thread.sleep(500);
+	    	} else {
+			    String message = t.toString();
+			
+			    channel.basicPublish("", TASK_QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes("UTF-8"));
+			    System.out.println(" [x] Sent '" + message + "'");
+	    	} 
+	    }
 
-    channel.close();
-    connection.close();
+	    channel.close();
+	    connection.close();
+	  } catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+public void addTask(Task t) {
+	  q.add(t);
   }
 
-  private static String getMessage(String[] strings) {
-    if (strings.length < 1)
-      return "Hello World!";
-    return joinStrings(strings, " ");
-  }
+public void stop() {
+	try {
+		Thread.sleep(1000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	run = false;
+}
 
-  private static String joinStrings(String[] strings, String delimiter) {
-    int length = strings.length;
-    if (length == 0) return "";
-    StringBuilder words = new StringBuilder(strings[0]);
-    for (int i = 1; i < length; i++) {
-      words.append(delimiter).append(strings[i]);
-    }
-    return words.toString();
-  }
+public void addTask(List<Task> list) {
+	for (Task t : list) {
+		this.addTask(t);
+	}
+}
 }
