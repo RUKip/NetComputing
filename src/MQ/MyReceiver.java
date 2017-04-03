@@ -37,7 +37,7 @@ public class MyReceiver {
 	  Connection connection = factory.newConnection();
 	  channel = connection.createChannel();
       channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
-	  System.out.println(" [*] Waiting for messages");
+	  //System.out.println(" [*] Waiting for messages");
 
 	  channel.basicQos(1);
 
@@ -46,11 +46,11 @@ public class MyReceiver {
 		  public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
 			  String message = new String(body, "UTF-8");
 			  long tag = envelope.getDeliveryTag();
-		      System.out.println(" [x] Received '" + message + "'");
+		      //System.out.println(" [x] Received '" + message + "'");
 			  try {
 				  Task t = new Task(message);
 				  if (t.getLoadperSec() + t.getDeviation() > core.getCapacity() - core.getMaxLoad()) {
-					  System.out.println("Refused");
+					  //System.out.println("Refused");
 					  channel.basicNack(envelope.getDeliveryTag(), false, true);
 				  } else {
 					  core.addTask(t);

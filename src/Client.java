@@ -120,7 +120,7 @@ public class Client implements Runnable {
 	private List<ConnectionObject> updateList(){
 		List<ConnectionObject> list = new ArrayList<ConnectionObject>();		
 		try{  
-			String databaseAddress = "rmi://192.168.0.9:8851/wonderland"; //HARDCODED RMI SERVER
+			String databaseAddress = "rmi://145.90.135.225:8851/wonderland"; //HARDCODED RMI SERVER
 			int port = 8851; //PORT RMI SERVER
 			
 
@@ -129,9 +129,7 @@ public class Client implements Runnable {
 					Naming.lookup(databaseAddress);
 			
 			if(initialStartup){
-				//BELOW IS FOR SOCKET CONNECTION
-//				String addressAddedComputer;
-				
+				//BELOW IS FOR SOCKET CONNECTION				
 				try { 
 		            LocateRegistry.createRegistry(port);
 		            System.out.println("java RMI registry created at port: ." + port);
