@@ -14,9 +14,11 @@ public enum ConnectionDao {
         private ConnectionDao() {
        	
                 Connection c = new Connection("1", "localhost");
-                c.setAddress("This is the standard terminal");
+                c.setSummary("This is the standard terminal");
                 contentProvider.put(c.getId(), c);
-                contentProvider.put("2", new Connection("2","This is just a test connection"));
+                Connection c2 = new Connection("2", "192.168.0.10");
+                c2.setSummary("This is a test connection");
+                contentProvider.put(c2.getId(), c2);
 //                c = new Connection("2", "This terminal is connected");
 //                c.setAddress("145.97.175.140");
 //                contentProvider.put("2", c);
