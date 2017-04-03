@@ -93,6 +93,6 @@ public class RestClient {
 	}
 	
   private static URI getBaseURI() {
-    return UriBuilder.fromUri("http://145.97.175.140:8080/jersey.todo").build();
+    return UriBuilder.fromUri("http://192.168.1.136:8080/jersey.todo").build();
   }
 }
