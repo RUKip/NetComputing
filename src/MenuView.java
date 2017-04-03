@@ -105,7 +105,7 @@ public class MenuView extends JFrame {
         JButton button3 = new JButton("Close everything properly");
         button3.setFont(myFont);
         button3.setForeground(new Color(27,159,198));
-        button3.setBounds((int)width/2-300, 750 + 120, 600,50);
+        button3.setBounds((int)width/4-200, 450 + 120, 600,50);
         button3.setBackground(Color.white);
         panel.add(button3);
         button3.addActionListener(new ActionListener() {
@@ -164,7 +164,7 @@ public class MenuView extends JFrame {
     public void removePanel() {
     	panel.setVisible(false);
     	if(t != null)	this.t.interrupt();
-    	//if(t != null)	this.t.stop();
+  
         dispose();
     }
 
