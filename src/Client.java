@@ -9,7 +9,6 @@ import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
 
 //import org.slf4j.Logger;
 
@@ -110,13 +109,11 @@ public class Client implements Runnable {
 		return false;
 	}
 	
-	//TODO: implement (now its randomly simulated too much energy)
 	private void checkEnergyLvl(){  //Energy usage check, set tooMuchEnergy true if threshold reached
-		int randomNr = ThreadLocalRandom.current().nextInt(0, 100+1);
-		//p.getWorkload
-		tooMuchEnergy = (randomNr>90);
-		tooLowEnergy = (randomNr<10);
-//		System.out.println("Random Nr: " + randomNr);
+		int workload = p.getWorkload();
+		System.out.println(workload);
+		tooMuchEnergy = (workload >90);
+		tooLowEnergy = (workload <10);
 	}
 	
 	

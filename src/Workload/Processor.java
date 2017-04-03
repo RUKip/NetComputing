@@ -43,6 +43,14 @@ public class Processor {
 		MQ.addTask(t);
 	}
 	
+	public int getWorkload(){
+		int totalLoad = 0;
+		for(Core core : this.coreList){
+			totalLoad += core.getWorkload();
+		}
+		return (100*totalLoad)/(this.numOfCores*this.capacity);
+	}
+	
 	public void stop() {
 		for(int i = 0; i < this.numOfCores; i++) {
 			Core c = new Core(i, capacity);
