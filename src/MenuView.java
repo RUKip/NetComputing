@@ -99,11 +99,9 @@ public class MenuView extends JFrame {
 					e1.printStackTrace();
 				}
 				text.setText("Created a new server!");
-
             }
         });
-        
-        
+
         JButton button2 = new JButton("Start a client");
         button2.setFont(myFont);
         button2.setForeground(new Color(27,159,198));
@@ -120,25 +118,9 @@ public class MenuView extends JFrame {
 
             }
         });
-        
-        
-        
-        //TODO Add project description button
-//        JButton projectDescription = new JButton("Project description");
-//        highscores.setForeground(Color.white);
-//        highscores.setBounds(200,500, 200, 30);
-//        highscores.setBackground(Color.BLACK);   
-//        this.add(highscores);
-//        controller.addActionListener(highscores, 4);
-        
-
-        
- 
-      
-        
+         
         //show local IP/port
         JLabel  localIPLabel = new JLabel();
-        JLabel  localPortLabel = new JLabel();
 
         try {
 			localIPLabel.setText(InetAddress.getLocalHost().getHostAddress() + ":8850");

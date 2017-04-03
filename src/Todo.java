@@ -1,17 +1,17 @@
-package Sockets;
+
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Connection {
+public class Todo {
         private String id;
         private String summary;
-        private String address;
+        private String description;
 
-        public Connection(){
+        public Todo(){
 
         }
-        public Connection (String id, String summary){
+        public Todo (String id, String summary){
                 this.id = id;
                 this.summary = summary;
         }
@@ -27,11 +27,11 @@ public class Connection {
         public void setSummary(String summary) {
                 this.summary = summary;
         }
-        public String getAddress() {
-                return address;
+        public String getDescription() {
+                return description;
         }
-        public void setAddress(String description) {
-                this.address = description;
+        public void setDescription(String description) {
+                this.description = description;
         }
 
 

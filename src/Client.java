@@ -112,7 +112,7 @@ public class Client implements Runnable {
 	private void checkEnergyLvl(){  //Energy usage check, set tooMuchEnergy true if threshold reached
 		int workload = p.getWorkload();
 		System.out.println(workload);
-		tooMuchEnergy = (workload >80);
+		tooMuchEnergy = (workload >60);
 		tooLowEnergy = (workload <15);
 	}
 	
@@ -138,9 +138,11 @@ public class Client implements Runnable {
 		        }
 				
 				System.out.println("pls give your ip address:");
-				Scanner s = new Scanner(System.in);
-				socketServeraddress = s.nextLine();
-				s.close();
+				Scanner scanner = new Scanner(System.in);
+				socketServeraddress = scanner.nextLine();
+				
+				scanner.close();
+				s.sendAddress(socketServeraddress);
 				System.out.println("Read: " + socketServeraddress);
 				
 				int portAddedComputer = 8850;
