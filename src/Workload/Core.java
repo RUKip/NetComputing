@@ -26,11 +26,11 @@ public class Core implements Runnable {
 		run = true;
 
 		//System.out.println("core running");
-		try {
-			this.receiver = new MyReceiver(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			this.receiver = new MyReceiver(this);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		while(run) {
 			updateWorkload();
 //			if (this.workload != 0)
@@ -98,6 +98,10 @@ public class Core implements Runnable {
 			total += (t.getLoadperSec() + t.getDeviation());
 		}
 		return total;
+	}
+
+	public int space() {
+		return capacity - workload;
 	}
 
 }

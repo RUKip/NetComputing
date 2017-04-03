@@ -14,24 +14,25 @@ import java.util.logging.*;
  * Install RabbitMQServer (which requires Erlang)
  */
 
+//class was based on the tutorial for Message Queues for RabbitMQ
 public class MyReceiver {
 
   private static final String TASK_QUEUE_NAME = "task_queue";
-  private static Core core;
   private static DefaultConsumer consumer;
   private static Channel channel;
+private static Processor processor;
   
   private static final Logger LOGGER = Logger.getLogger( MyReceiver.class.getName() );
 
-	public MyReceiver(Core core) throws Exception {
-		MyReceiver.core = core;
+	public MyReceiver(Processor processor) throws Exception {
+		MyReceiver.processor = processor;
 	    init();
 	    channel.basicConsume(TASK_QUEUE_NAME, false, consumer);
 	}
 
 	//for testing purposes
 	public static void main(String[] argv) throws Exception {
-		new Processor(1,14);
+		new Processor(2,14);
 	}
 
   private static void init() throws Exception {
@@ -58,7 +59,8 @@ public class MyReceiver {
 			  LOGGER.log( Level.FINE, "{X} Received '" + message + "'");
 			  try {
 				  Task t = new Task(message);
-				  if (t.getLoadperSec() + t.getDeviation() > core.getCapacity() - core.getMaxLoad()) {
+				  Core core = processor.getLeastActiveCore();
+				  if (t.getLoadperSec() + t.getDeviation() > core.space()) {
 					  //System.out.println("Refused");
 					  channel.basicNack(envelope.getDeliveryTag(), false, true);
 				  } else {
