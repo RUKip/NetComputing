@@ -3,6 +3,7 @@ package Workload;
 import java.util.ArrayList;
 import java.util.List;
 
+import MQ.MyReceiver;
 import MQ.MySender;
 
 public class Processor {
@@ -12,6 +13,7 @@ public class Processor {
 	private MySender MQ;
 	
 	public Processor (int cores, int cap) {
+		if (cores < 1) cores = 1;
 		if (cap < 20) cap = 20;
 		this.setNumOfCores(cores); 
 		this.setCapacity(cap);
@@ -22,6 +24,11 @@ public class Processor {
 		}
 		MQ = new MySender();
 		new Thread(MQ).start();
+		try {
+			new MyReceiver(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public int getNumOfCores() {
@@ -59,6 +66,14 @@ public class Processor {
 		}
 		MQ.stop();
 		
+	}
+
+	public Core getLeastActiveCore() {
+		Core leastActive = coreList.get(0);
+		for (Core core : coreList) {
+			if (core.space() > leastActive.space()) leastActive = core;
+		}
+		return leastActive;
 	}
 
 }

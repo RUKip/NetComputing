@@ -51,7 +51,7 @@ public class Client implements Runnable {
 		servers = new ArrayList<>();
 		this.s = s;
 		new Thread(s).start();
-		p = new Processor(2, 17); //can be scaled up or down for own testing purposes.
+		p = new Processor(2, 25); //can be scaled up or down for own testing purposes.
 	}
 	
 	protected boolean connectToServer(ConnectionObject connection) { //connects to server and tries turning it on, returns true if succeeded
@@ -112,8 +112,8 @@ public class Client implements Runnable {
 	private void checkEnergyLvl(){  //Energy usage check, set tooMuchEnergy true if threshold reached
 		int workload = p.getWorkload();
 		System.out.println(workload);
-		tooMuchEnergy = (workload >90);
-		tooLowEnergy = (workload <10);
+		tooMuchEnergy = (workload >80);
+		tooLowEnergy = (workload <15);
 	}
 	
 	

@@ -44,17 +44,16 @@ public class MySender implements Runnable {
 	    q.add(new Task(3,1,4));
 	    q.add(new Task(5,0,3));
 	    q.add(new Task(4,1,4));
-	    q.add(new Task(3,2,7));
+	    q.add(new Task(3,1,7));
 	    q.add(new Task(5,0,9));
 	    
 	    run = true;
 	    while(run) { 
-    		int rand = r.nextInt(3);
-    		if(rand == 1) q.add(new Task(3,2,7));
+    		int rand = r.nextInt(2);
+    		if(rand == 1) q.add(new Task(3,0,7));
 	    	Task t = q.poll();
 	    	if(t == null) {
-	    		rand = r.nextInt(2);
-	    		if(rand == 1) q.add(new Task(3,2,7));
+	    		q.add(new Task(5,1,9));
 	    		Thread.sleep(500);
 	    	} else {
 			    String message = t.toString();
