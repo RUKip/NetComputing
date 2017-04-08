@@ -55,6 +55,7 @@ public class SocketServer implements Runnable {
 		}else{
 			if(!this.address.equals("")) {
 				t.delete(id.toString());
+				System.out.println("deleted shit");
 			}
 		}
 	}
