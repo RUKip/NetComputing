@@ -13,7 +13,7 @@ public class Connection {
         }
         public Connection (String id, String summary){
                 this.id = id;
-                this.summary = summary;
+                this.address = summary;
         }
         public String getId() {
                 return id;

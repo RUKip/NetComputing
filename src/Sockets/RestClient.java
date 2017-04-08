@@ -25,7 +25,7 @@ public class RestClient {
 		
 		Connection own = new Connection(id.toString() , address);
 		own.setSummary("This is a new connection");
-		Response response = service.path("rest").path("todos").path(own.getId()).request(MediaType.APPLICATION_XML).put(Entity.entity(own,MediaType.APPLICATION_XML),Response.class);
+		Response response = service.path("rest").path("connections").path(own.getId()).request(MediaType.APPLICATION_XML).put(Entity.entity(own,MediaType.APPLICATION_XML),Response.class);
         System.out.println(response.getStatus());
 	}
 	
@@ -35,7 +35,7 @@ public class RestClient {
         ClientConfig config = new ClientConfig();
         Client client = ClientBuilder.newClient(config);
         WebTarget service = client.target(getBaseURI());
-        service.path("rest").path("todos/"+id).request().delete();
+        service.path("rest").path("connections/"+id).request().delete();
 		
 	}
 	

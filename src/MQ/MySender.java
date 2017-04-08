@@ -49,11 +49,11 @@ public class MySender implements Runnable {
 	    
 	    run = true;
 	    while(run) { 
-    		int rand = r.nextInt(2);
-    		if(rand == 1) q.add(new Task(3,0,7));
+    		int rand = r.nextInt(10);
+    		//if(rand == 1) q.add(new Task(3,0,7));
 	    	Task t = q.poll();
 	    	if(t == null) {
-	    		q.add(new Task(5,1,9));
+	    		//q.add(new Task(5,1,9));
 	    		Thread.sleep(500);
 	    	} else {
 			    String message = t.toString();

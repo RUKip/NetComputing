@@ -25,7 +25,7 @@ public class SocketServer implements Runnable {
 	public SocketServer() {
 		try {
 				System.out.println("made server object");
-				serverSocket = new ServerSocket(8850); //TODO: hardcoded 8850, so always connect to 8850 in the socketaddress
+				serverSocket = new ServerSocket(8801); //TODO: hardcoded 8801, so always connect to 8850 in the socketaddress
 		} catch (IOException e) {
 //			logger.error("Unable to intialize socket");
 			e.printStackTrace();
@@ -49,6 +49,7 @@ public class SocketServer implements Runnable {
 		if(value){
 			if(!this.address.equals("")) {
 				t.update(address,id);
+				System.out.println("for real now");
 			}
 			System.out.println("Stuff is uploaded... ");
 		}else{
