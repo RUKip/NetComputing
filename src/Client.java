@@ -121,9 +121,9 @@ public class Client implements Runnable {
 		List<ConnectionObject> list = new ArrayList<ConnectionObject>();		
 		try{  
 			
-			String databaseAddress = "rmi://192.168.1.136:8851/wonderland"; //HARDCODED RMI SERVER
+			String databaseAddress = "rmi://145.90.133.95:8802/wonderland"; //HARDCODED RMI SERVER
 
-			int port = 8851; //PORT RMI SERVER
+			int port = 8802; //PORT RMI SERVER
 			
 
 	        
@@ -147,7 +147,7 @@ public class Client implements Runnable {
 				s.sendAddress(socketServeraddress);
 				System.out.println("Read: " + socketServeraddress);
 				
-				int portAddedComputer = 8850;
+				int portAddedComputer = 8801;
 				
 				initialStartup = false;
 				System.out.println("added this computer to the RMI server");

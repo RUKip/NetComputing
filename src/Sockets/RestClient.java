@@ -40,7 +40,7 @@ public class RestClient {
 	}
 	
   private static URI getBaseURI() {
-    return UriBuilder.fromUri("http://192.168.1.136:8080/jersey.connections").build();
+    return UriBuilder.fromUri("http://145.97.173.179:8080/jersey.connections").build();
   }
   
   

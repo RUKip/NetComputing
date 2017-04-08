@@ -10,7 +10,7 @@ public class Server{
 		
 		DatabaseImpl databaseImplementation = new DatabaseImpl();
 		
-		int port = 8851; //HARDCODED RMI PORT
+		int port = 8802; //HARDCODED RMI PORT
 
 	    try { 
 	        LocateRegistry.createRegistry(port);
@@ -19,7 +19,7 @@ public class Server{
 	        System.out.println("java RMI registry already exists.");
 	    }	
 
-	    String hostName = "192.168.1.136"; //HARDCODED TO RMI SERVER
+	    String hostName = "145.90.133.95"; //HARDCODED TO RMI SERVER
 
 	    String bindLocation = "//" + hostName + ":" + port + "/wonderland";
 
